@@ -1,0 +1,44 @@
+﻿<Page x:Class="WpfLawyersSystem.Views.TeamPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfLawyersSystem.Views"
+      xmlns:col="clr-namespace:System.Collections;assembly=mscorlib"
+      xmlns:vm="clr-namespace:WpfLawyersSystem.ViewModels"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="600"
+      Title="TeamPage">
+
+    <Page.DataContext>
+        <vm:TeamViewModel/>
+    </Page.DataContext>
+
+    <Grid Background="{StaticResource MediumGreenBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition MinHeight="40" Height="1*"/>
+            <RowDefinition Height="8*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" TextAlignment="Center" VerticalAlignment="Center" FontSize="36" Text="Команды"/>
+
+        <ListView Margin="10" Grid.Row="1" x:Name="Teams" ItemsSource="{Binding ListOfTeams.List, UpdateSourceTrigger=PropertyChanged}"
+                  SelectedItem="{Binding SelectedTeam}" Style="{StaticResource GreenListView}">
+            <ListView.ContextMenu>
+                <!--Контесктное меню-->
+                <ContextMenu >
+                    <MenuItem Header="Изменить/Удалить" Command="{Binding Path=bOpenSelectedItem_Command}"/>
+                </ContextMenu>
+            </ListView.ContextMenu>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Name" Width="145" DisplayMemberBinding="{Binding Path = Name }"/>
+                    <GridViewColumn Header="Rating" Width="145" DisplayMemberBinding="{Binding Path= Rating }" />
+                    <GridViewColumn Header="Wins" Width="145" DisplayMemberBinding="{Binding Path = Wins}" />
+                    <GridViewColumn Header="Loses" Width="145" DisplayMemberBinding="{Binding Path = Loses}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+        
+    </Grid>
+</Page>
