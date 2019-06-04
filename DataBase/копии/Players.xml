@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<ListOfPlayers xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <List>
+    <Player>
+      <Name>Zeus</Name>
+      <Age>31</Age>
+      <KD>0.95</KD>
+      <id_Serialization>0</id_Serialization>
+      <teamId_Serialization>0</teamId_Serialization>
+    </Player>
+    <Player>
+      <Name>s1mple</Name>
+      <Age>21</Age>
+      <KD>1.5</KD>
+      <id_Serialization>1</id_Serialization>
+      <teamId_Serialization>0</teamId_Serialization>
+    </Player>
+  </List>
+</ListOfPlayers><Name z:Id="11">NiKo</Name><Team z:Id="12"><Loses>35</Loses><Name z:Id="13">NaVi</Name><Rating>25</Rating><TheCrew z:Id="14" z:Size="2"><Player z:Id="15"><Age>31</Age><KD>0.89</KD><Name z:Id="16">Zeus</Name><Team z:Ref="12" i:nil="true"/></Player><Player z:Id="17"><Age>23</Age><KD>2.2</KD><Name z:Id="18">s1mple</Name><Team z:Ref="5" i:nil="true"/></Player></TheCrew><Wins>150</Wins></Team></Player></TheCrew><Wins>180</Wins></Team></Player><Player z:Id="19"><Age>23</Age><KD>2.1</KD><Name z:Id="20">NiKo</Name><Team z:Ref="5" i:nil="true"/></Player><Player z:Id="21"><Age>31</Age><KD>0.89</KD><Name z:Id="22">Zeus</Name><Team z:Id="23"><Loses>35</Loses><Name z:Id="24">NaVi</Name><Rating>25</Rating><TheCrew z:Id="25" z:Size="1"><Player z:Ref="21" i:nil="true"/></TheCrew><Wins>150</Wins></Team></Player></List></ListOfPlayers>

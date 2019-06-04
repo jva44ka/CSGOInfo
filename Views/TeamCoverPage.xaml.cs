@@ -12,18 +12,20 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using WpfLawyersSystem.ViewModels;
 
 namespace WpfLawyersSystem.Views
 {
     /// <summary>
-    /// Логика взаимодействия для TeamPage.xaml
+    /// Логика взаимодействия для TeamCoverPage.xaml
     /// </summary>
-    public partial class TeamPage : Page
+    public partial class TeamCoverPage : Page
     {
-        public TeamPage()
+        public TeamCoverPage(out ViewModels.TeamViewModel DataContextParam)
         {
             InitializeComponent();
+            ViewModels.TeamViewModel vm = new ViewModels.TeamViewModel();
+            DataContext = vm;
+            DataContextParam = vm;
         }
     }
 }

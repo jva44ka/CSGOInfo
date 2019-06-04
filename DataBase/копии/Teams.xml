@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<ListOfTeams xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <List>
+    <Team>
+      <Name>NaVi</Name>
+      <Rating>1.54</Rating>
+      <Wins>220</Wins>
+      <Loses>190</Loses>
+      <id_Serialization>0</id_Serialization>
+      <playersIds_Serialization>
+        <int>0</int>
+        <int>1</int>
+      </playersIds_Serialization>
+    </Team>
+  </List>
+</ListOfTeams>r z:Id="8"><Age>22</Age><KD>2.1</KD><Name z:Id="9">NiKo</Name><Team z:Id="10"><Loses>35</Loses><Name z:Id="11">NaVi</Name><Rating>25</Rating><TheCrew z:Id="12" z:Size="3"><Player z:Id="13"><Age>31</Age><KD>0.89</KD><Name z:Id="14">Zeus</Name><Team z:Ref="10" i:nil="true"/></Player><Player z:Id="15"><Age>21</Age><KD>2.9</KD><Name z:Id="16">s1mple</Name><Team z:Ref="10" i:nil="true"/></Player><Player z:Id="17"><Age>21</Age><KD>2.9</KD><Name z:Id="18">s1mple</Name><Team z:Ref="10" i:nil="true"/></Player></TheCrew><Wins>150</Wins></Team></Player></TheCrew><Wins>180</Wins></Team><Team z:Ref="10" i:nil="true"/></List></ListOfTeams>

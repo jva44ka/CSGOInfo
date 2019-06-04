@@ -1,5 +1,4 @@
-﻿using GalaSoft.MvvmLight.Command;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,11 +6,12 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using WpfLawyersSystem.Models;
+using DevExpress.Mvvm;
 using WpfLawyersSystem.Views;
 
 namespace WpfLawyersSystem.ViewModels
 {
-    public class OnePlayerViewModel : NotifycationsPropertyChanged
+    public class OnePlayerViewModel : BaseViewModel
     {
         Player _newPlayer;
         Player _selectedPlayer;
@@ -62,44 +62,23 @@ namespace WpfLawyersSystem.ViewModels
         {
             get
             {
-                return new RelayCommand(() =>
-                FactoryOfLists.ObjPlayers.List.Add(new Player(_newPlayer))
-                );
-            }
-        }
-
-        /*public ICommand bUpdate_Command // меняется само по привязке соответственно в методе нет смысла
-        {
-            get
-            {
-                return new RelayCommand(() => 
+                return new DelegateCommand(() =>
                 {
-                    FactoryOfLists.ObjPlayers.List.Remove(_selectedPlayer);
-                    FactoryOfLists.ObjPlayers.List.Add(_selectedPlayer);
+                    NewPlayer.Team.TheCrew.Add(_newPlayer);
+                    FactoryOfLists.ObjPlayers.List.Add(NewPlayer);
                 });
             }
-        }*/
-
+        }
         public ICommand bRemove_Command
         {
             get
             {
-                return new RelayCommand(() =>
-                FactoryOfLists.ObjPlayers.List.Remove(_selectedPlayer)
-                );
+                return new DelegateCommand(() =>
+                {
+                    SelectedPlayer.Team.TheCrew.Remove(_selectedPlayer);
+                    FactoryOfLists.ObjPlayers.List.Remove(SelectedPlayer);
+                });
             }
         }
-
-
-        private void Add() // добавить запись //дубликат комманды на всякий
-        {
-            FactoryOfLists.ObjPlayers.List.Add(_newPlayer);
-        }
-
-        public void Update() // обновить эту выбранную запись
-        { }
-
-        public void Delete() // удалить эту выбраную запись
-        { }
     }
 }

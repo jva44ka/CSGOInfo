@@ -12,16 +12,15 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using WpfLawyersSystem.ViewModels;
 
 namespace WpfLawyersSystem.Views
 {
     /// <summary>
-    /// Логика взаимодействия для TeamPage.xaml
+    /// Логика взаимодействия для TeamInfoPage.xaml
     /// </summary>
-    public partial class TeamPage : Page
+    public partial class TeamInfoPage : Page
     {
-        public TeamPage()
+        public TeamInfoPage()
         {
             InitializeComponent();
         }

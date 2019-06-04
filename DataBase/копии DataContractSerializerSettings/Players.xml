@@ -1,0 +1,36 @@
+<ListOfPlayers z:Id="1" xmlns="http://schemas.datacontract.org/2004/07/WpfLawyersSystem.Models" xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns:z="http://schemas.microsoft.com/2003/10/Serialization/"><List z:Id="2" z:Size="0"/></ListOfPlayers><Age>31</Age><KD>0.95</KD><Name z:Id="4">Zeus</Name><Team z:Id="5"><Loses>20</Loses><Name z:Id="6">NaVi</Name><Rating>1.05</Rating><TheCrew z:Id="7" z:Size="0"/><Wins>15</Wins></Team></Player><Player z:Id="8"><Age>32</Age><KD>0.98</KD><Name z:Id="9">Edward</Name><Team z:Id="10"><Loses>10</Loses><Name z:Id="11">FaZe</Name><Rating>1.12</Rating><TheCrew z:Id="12" z:Size="2"><Player z:Id="13"><Age>31</Age><KD>0.95</KD><Name z:Id="14">Zeus</Name><Team z:Id="15"><Loses>20</Loses><Name z:Id="16">NaVi</Name><Rating>1.05</Rating><TheCrew z:Id="17" z:Size="0"/><Wins>15</Wins></Team></Player><Player z:Id="18"><Age>31</Age><KD>0.95</KD><Name z:Id="19">Zeus</Name><Team z:Id="20"><Loses>20</Loses><Name z:Id="21">NaVi</Name><Rating>1.05</Rating><TheCrew z:Id="22" z:Size="0"/><Wins>15</Wins></Team></Player></TheCrew><Wins>22</Wins></Team></Player><Player z:Id="23"><Age>26</Age><KD>1.44</KD><Name z:Id="24">NiKo</Name><Team z:Id="25"><Loses>10</Loses><Name z:Id="26">FaZe</Name><Rating>1.12</Rating><TheCrew z:Id="27" z:Size="2"><Player z:Id="28"><Age>31</Age><KD>0.95</KD><Name z:Id="29">Zeus</Name><Team z:Id="30"><Loses>20</Loses><Name z:Id="31">NaVi</Name><Rating>1.05</Rating><TheCrew z:Id="32" z:Size="0"/><Wins>15</Wins></Team></Player><Player z:Id="33"><Age>31</Age><KD>0.95</KD><Name z:Id="34">Zeus</Name><Team z:Id="35"><Loses>20</Loses><Name z:Id="36">NaVi</Name><Rating>1.05</Rating><TheCrew z:Id="37" z:Size="0"/><Wins>15</Wins></Team></Player></TheCrew><Wins>22</Wins></Team></Player><Player z:Id="38"><Age>25</Age><KD>1.2</KD><Name z:Id="39">Rain</Name><Team z:Id="40"><Loses>20</Loses><Name z:Id="41">NaVi</Name><Rating>1.05</Rating><TheCrew z:Id="42" z:Size="0"/><Wins>15</Wins></Team></Player><Player z:Id="43"><Age>54</Age><KD>1.54</KD><Name z:Id="44">ЖМА</Name><Team z:Id="45"><Loses>20</Loses><Name z:Id="46">NaVi</Name><Rating>1.05</Rating><TheCrew z:Id="47" z:Size="0"/><Wins>15</Wins></Team></Player><Player z:Id="48"><Age>27</Age><KD>2.27</KD><Name z:Id="49">Детров</Name><Team z:Id="50"><Loses>10</Loses><Name z:Id="51">FaZe</Name><Rating>1.12</Rating><TheCrew z:Id="52" z:Size="2"><Player z:Id="53"><Age>31</Age><KD>0.95</KD><Name z:Id="54">Zeus</Name><Team z:Id="55"><Loses>20</Loses><Name z:Id="56">NaVi</Name><Rating>1.05</Rating><TheCrew z:Id="57" z:Size="0"/><Wins>15</Wins></Team></Player><Player z:Id="58"><Age>31</Age><KD>0.95</KD><Name z:Id="59">Zeus</Name><Team z:Id="60"><Loses>20</Loses><Name z:Id="61">NaVi</Name><Rating>1.05</Rating><TheCrew z:Id="62" z:Size="0"/><Wins>15</Wins></Team></Player></TheCrew><Wins>22</Wins></Team></Player></List></ListOfPlayers>2.27</KD>
+      <Team>
+        <Name>FaZe</Name>
+        <Rating>1.12</Rating>
+        <Wins>22</Wins>
+        <Loses>10</Loses>
+        <TheCrew>
+          <Player>
+            <Name>Zeus</Name>
+            <Age>31</Age>
+            <KD>0.95</KD>
+            <Team>
+              <Name>NaVi</Name>
+              <Rating>1.05</Rating>
+              <Wins>15</Wins>
+              <Loses>20</Loses>
+              <TheCrew />
+            </Team>
+          </Player>
+          <Player>
+            <Name>Zeus</Name>
+            <Age>31</Age>
+            <KD>0.95</KD>
+            <Team>
+              <Name>NaVi</Name>
+              <Rating>1.05</Rating>
+              <Wins>15</Wins>
+              <Loses>20</Loses>
+              <TheCrew />
+            </Team>
+          </Player>
+        </TheCrew>
+      </Team>
+    </Player>
+  </List>
+</ListOfPlayers>

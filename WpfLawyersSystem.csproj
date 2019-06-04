@@ -49,27 +49,12 @@
     <Reference Include="DevExpress.Mvvm.UI, Version=18.2.0.0, Culture=neutral, PublicKeyToken=382ad28f6ae31f30, processorArchitecture=MSIL">
       <HintPath>packages\DevExpressMvvm.18.2.3\lib\net452\DevExpress.Mvvm.UI.dll</HintPath>
     </Reference>
-    <Reference Include="GalaSoft.MvvmLight, Version=5.4.1.0, Culture=neutral, PublicKeyToken=e7570ab207bcb616, processorArchitecture=MSIL">
-      <HintPath>packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.dll</HintPath>
-    </Reference>
-    <Reference Include="GalaSoft.MvvmLight.Extras, Version=5.4.1.0, Culture=neutral, PublicKeyToken=669f0b5e8f868abf, processorArchitecture=MSIL">
-      <HintPath>packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.Extras.dll</HintPath>
-    </Reference>
-    <Reference Include="GalaSoft.MvvmLight.Platform, Version=5.4.1.0, Culture=neutral, PublicKeyToken=5f873c45e98af8a1, processorArchitecture=MSIL">
-      <HintPath>packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.Platform.dll</HintPath>
-    </Reference>
-    <Reference Include="LightMessageBus, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\LightMessageBus.1.0.1\lib\portable-net4+sl5+wp8+win8\LightMessageBus.dll</HintPath>
-    </Reference>
     <Reference Include="Mvvm, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\Mvvm.1.0.4\lib\Mvvm.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>packages\MvvmLightLibs.5.4.1.1\lib\net45\System.Windows.Interactivity.dll</HintPath>
-    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -89,7 +74,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Models\FactoryOfLists.cs" />
-    <Compile Include="Models\NotifycationsPropertyChanged.cs" />
+    <Compile Include="Models\BaseViewModel.cs" />
     <Compile Include="ViewModels\MatchViewModel.cs" />
     <Compile Include="ViewModels\OnePlayerViewModel.cs" />
     <Compile Include="ViewModels\OneTeamViewModel.cs" />
@@ -111,8 +96,20 @@
     <Compile Include="Views\CreateTeamWindow.xaml.cs">
       <DependentUpon>CreateTeamWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\PlayerCoverPage.xaml.cs">
+      <DependentUpon>PlayerCoverPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PlayerInfoPage.xaml.cs">
+      <DependentUpon>PlayerInfoPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\PlayerPage.xaml.cs">
       <DependentUpon>PlayerPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TeamCoverPage.xaml.cs">
+      <DependentUpon>TeamCoverPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TeamInfoPage.xaml.cs">
+      <DependentUpon>TeamInfoPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\TeamPage.xaml.cs">
       <DependentUpon>TeamPage.xaml</DependentUpon>
@@ -193,7 +190,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\PlayerCoverPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PlayerInfoPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\PlayerPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TeamCoverPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TeamInfoPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

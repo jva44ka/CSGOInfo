@@ -15,6 +15,8 @@ namespace WpfLawyersSystem.Models
         string _name;
         int _age;
         double _kd;
+
+        [XmlIgnore]
         Team _team;
         //Video
 
@@ -42,6 +44,8 @@ namespace WpfLawyersSystem.Models
                 _kd = value;
             }
         }
+
+        [XmlIgnore]
         public Team Team
         {
             get { return _team; }
@@ -50,6 +54,11 @@ namespace WpfLawyersSystem.Models
                 _team = value;
             }
         }
+
+        //Для серриализации
+        public int id_Serialization { get; set; }
+        public int teamId_Serialization { get; set; }
+        //
 
         public Player()
         {
@@ -79,28 +88,16 @@ namespace WpfLawyersSystem.Models
 
     public class ListOfPlayers// : NotifycationsPropertyChanged
     {
-        private ObservableCollection<Player> _list;
-        public ObservableCollection<Player> List
-        {
-            get
-            {
-                return _list;
-            }
-            set
-            {
-                _list = value;
-                //base.OnPropertyChanged();
-            }
-        }
+        public ObservableCollection<Player> List { get; set; }
 
         public ListOfPlayers()
         {
-            _list = new ObservableCollection<Player>();
+            List = new ObservableCollection<Player>();
         } //для серриализации
 
         public ListOfPlayers(ObservableCollection<Player> listParam)
         {
-            _list = listParam;
+            List = listParam;
             /*_list = new ObservableCollection<Player>();
             if (listParam != null)
             {
@@ -140,8 +137,8 @@ namespace WpfLawyersSystem.Models
         public void Redresh()
         {
             Player testPlayer = new Player("testPlayer");
-            _list.Add(testPlayer);
-            _list.Remove(testPlayer);
+            List.Add(testPlayer);
+            List.Remove(testPlayer);
         }
         public void Add()
         { }

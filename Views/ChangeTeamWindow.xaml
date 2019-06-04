@@ -61,8 +61,8 @@
                 <TextBox Grid.Row="2" Text="{Binding Players[0].Age}" Background="{StaticResource LightGreenBrush}"/>
                 <TextBox Grid.Row="3" Text="{Binding Players[0].KD}" Background="{StaticResource LightGreenBrush}"/>
                 <Button Grid.Row="4" Margin="3" x:Name="ButtonCreatePlayer1" Style="{StaticResource GreenButton}"
-                        Content="{Binding Path=ButtonPlayersContent[0], UpdateSourceTrigger=PropertyChanged, NotifyOnTargetUpdated=True}" 
-                        Command="{Binding bAddPlayerInTeam_Command}" CommandParameter="0"/>
+                        Content="{Binding Path=ButtonPlayersContent[0], UpdateSourceTrigger=PropertyChanged}" 
+                        Command="{Binding bCreateOrDeletePlayer_Command}" CommandParameter="0"/>
             </Grid>
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
@@ -78,7 +78,7 @@
                 <TextBox Grid.Row="3" Text="{Binding Players[1].KD}" Background="{StaticResource LightGreenBrush}"/>
                 <Button Grid.Row="4" Margin="3" 
                         Content="{Binding Path=ButtonPlayersContent[1],  UpdateSourceTrigger=PropertyChanged}" 
-                        Command="{Binding bAddPlayerInTeam_Command}" CommandParameter="1"
+                        Command="{Binding bCreateOrDeletePlayer_Command}" CommandParameter="1"
                         Style="{StaticResource GreenButton}"/>
             </Grid>
             <Grid Grid.Column="2">
@@ -94,7 +94,7 @@
                 <TextBox Grid.Row="2" Text="{Binding Players[2].Age}" Background="{StaticResource LightGreenBrush}"/>
                 <TextBox Grid.Row="3" Text="{Binding Players[2].KD}" Background="{StaticResource LightGreenBrush}"/>
                 <Button Grid.Row="4" Margin="3" Content="{Binding Path=ButtonPlayersContent[2]}" 
-                        Command="{Binding bAddPlayerInTeam_Command}" CommandParameter="2"
+                        Command="{Binding bCreateOrDeletePlayer_Command}" CommandParameter="2"
                         Style="{StaticResource GreenButton}"/>
             </Grid>
             <Grid Grid.Column="3">
@@ -110,7 +110,7 @@
                 <TextBox Grid.Row="2" Text="{Binding Players[3].Age}" Background="{StaticResource LightGreenBrush}"/>
                 <TextBox Grid.Row="3" Text="{Binding Players[3].KD}" Background="{StaticResource LightGreenBrush}"/>
                 <Button Grid.Row="4" Margin="3" Content="{Binding Path=ButtonPlayersContent[3]}" 
-                        Command="{Binding bAddPlayerInTeam_Command}" CommandParameter="3"
+                        Command="{Binding bCreateOrDeletePlayer_Command}" CommandParameter="3"
                         Style="{StaticResource GreenButton}"/>
             </Grid>
             <Grid  Grid.Column="4">
@@ -126,7 +126,7 @@
                 <TextBox Grid.Row="2" Text="{Binding Players[4].Age}" Background="{StaticResource LightGreenBrush}"/>
                 <TextBox Grid.Row="3" Text="{Binding Players[4].KD}" Background="{StaticResource LightGreenBrush}"/>
                 <Button Grid.Row="4" Margin="3" Content="{Binding Path=ButtonPlayersContent[4]}" 
-                        Command="{Binding bAddPlayerInTeam_Command}" CommandParameter="4"
+                        Command="{Binding bCreateOrDeletePlayer_Command}" CommandParameter="4"
                         Style="{StaticResource GreenButton}"/>
             </Grid>
         </Grid>

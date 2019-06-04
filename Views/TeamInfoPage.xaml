@@ -1,0 +1,71 @@
+﻿<Page x:Class="WpfLawyersSystem.Views.TeamInfoPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfLawyersSystem.Views"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="600"
+      Title="TeamInfoPage"
+      Background="{StaticResource MediumGreenBrush}">
+
+    <Grid Margin="80,60">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Label Style="{StaticResource LabelInfo2}" Content="Название" />
+            <Label Grid.Column="1" Style="{StaticResource LabelInfo2}" Content="{Binding Path=SelectedTeam.Name}"/>
+            <Label Grid.Row="1" Style="{StaticResource LabelInfo1}" Content="Рейтинг" />
+            <Label Grid.Row="1" Grid.Column="1" Style="{StaticResource LabelInfo1}" Content="{Binding Path=SelectedTeam.Rating}"/>
+            <Label Grid.Row="2" Style="{StaticResource LabelInfo2}" Content="Выйгрыши" />
+            <Label Grid.Row="2" Grid.Column="1" Style="{StaticResource LabelInfo2}" Content="{Binding Path=SelectedTeam.Wins}"/>
+            <Label Grid.Row="3" Style="{StaticResource LabelInfo1}" Content="Проигрыши" />
+            <Label Grid.Row="3" Grid.Column="1" Style="{StaticResource LabelInfo1}" Content="{Binding Path=SelectedTeam.Loses}"/>
+        </Grid>
+        <Grid Grid.Row="1" Background="{StaticResource LightGreenBrush}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" Style="{StaticResource BaseLabel}" Content="{Binding Path=SelectedTeam.TheCrew[0].Name, FallbackValue=''}">
+                <!--
+                <Label.ToolTip>
+                    <local:TeamPage Content="{Binding SelectedTeam.TheCrew[0].KD}"></local:TeamPage>
+                </Label.ToolTip>-->
+            </Label>
+            <Label Grid.Column="1" Style="{StaticResource BaseLabel}" Content="{Binding Path=SelectedTeam.TheCrew[1].Name, FallbackValue=''}"/>
+            <Label Grid.Column="2" Style="{StaticResource BaseLabel}" Content="{Binding Path=SelectedTeam.TheCrew[2].Name, FallbackValue=''}"/>
+            <Label Grid.Column="3" Style="{StaticResource BaseLabel}" Content="{Binding Path=SelectedTeam.TheCrew[3].Name, FallbackValue=''}"/>
+            <Label Grid.Column="4" Style="{StaticResource BaseLabel}" Content="{Binding Path=SelectedTeam.TheCrew[4].Name, FallbackValue=''}"/>
+        </Grid>
+        <Grid Grid.Row="2" Background="{StaticResource MediumGreenBrush}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Style="{StaticResource GreenButton}" FontSize="{StaticResource H2}" 
+                    Content="Назад" Command="{Binding bBackToList_Command}"/>
+            <Button Grid.Column="1" Style="{StaticResource GreenButton}" Content="{StaticResource PanIcon1}"
+                    Command="{Binding bOpenSelectedItem_Command}"/>
+            <Button Grid.Column="2" Style="{StaticResource GreenButton}" Content="{StaticResource TrashIcon1}"
+                    Command="{Binding bRemoveItem_Command}"/>
+        </Grid>
+    </Grid>
+</Page>

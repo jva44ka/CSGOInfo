@@ -30,7 +30,8 @@
         <ComboBox FontSize="24" Grid.Column="3" Grid.Row="3" 
                   ItemsSource="{Binding ListOfTeams.List}"
                   DisplayMemberPath="Name"
-                  SelectedItem="{Binding Path=SelectedPlayer.Team}"/>
+                  SelectedItem="{Binding Path=SelectedPlayer.Team, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                  SelectedValue="{Binding Path=SelectedPlayer.Team, UpdateSourceTrigger=PropertyChanged}"/>
         <Button Style="{StaticResource GreenButton}" Grid.ColumnSpan="2" Grid.Row="5" Content="Удалить" FontSize="24" Margin="10" Command="{Binding bRemove_Command}"/>
     </Grid>
 </Window>

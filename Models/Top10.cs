@@ -12,27 +12,19 @@ namespace WpfLawyersSystem.Models
 {
     public class Top10
     {
-        ObservableCollection<Team> _top;
-        public ObservableCollection<Team> Top
-        {
-            get
-            {
-                return _top;
-            }
-            set
-            {
-                _top = value;
-            }
-        }
-
+        [XmlIgnore]
+        public ObservableCollection<Team> Top { get; set; }
+        //Для серриализации
+        public int[] teamIds_Serialization { get; set; }
+        //
         public Top10()
         {
-            _top = new ObservableCollection<Team>();
+            Top = new ObservableCollection<Team>();
         }
 
         public Top10(ObservableCollection<Team> top)
         {
-            _top = top;
+            Top = top;
         }
     }
 }

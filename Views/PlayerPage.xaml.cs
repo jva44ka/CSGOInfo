@@ -13,12 +13,9 @@ namespace WpfLawyersSystem.Views
     /// </summary>
     public partial class PlayerPage : Page
     {
-        public PlayerPage(out PlayerViewModel DataContextParam)
+        public PlayerPage()
         {
             InitializeComponent();
-            ViewModels.PlayerViewModel vm = new ViewModels.PlayerViewModel();
-            DataContext = vm;
-            DataContextParam = vm;
         }
     }
 }

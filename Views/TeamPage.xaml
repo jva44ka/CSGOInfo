@@ -10,10 +10,6 @@
       d:DesignHeight="450" d:DesignWidth="600"
       Title="TeamPage">
 
-    <Page.DataContext>
-        <vm:TeamViewModel/>
-    </Page.DataContext>
-
     <Grid Background="{StaticResource MediumGreenBrush}">
         <Grid.RowDefinitions>
             <RowDefinition MinHeight="40" Height="1*"/>
@@ -22,12 +18,13 @@
 
         <TextBlock Grid.Row="0" TextAlignment="Center" VerticalAlignment="Center" FontSize="36" Text="Команды"/>
 
-        <ListView Margin="10" Grid.Row="1" x:Name="Teams" ItemsSource="{Binding ListOfTeams.List, UpdateSourceTrigger=PropertyChanged}"
+        <ListView Margin="10" Grid.Row="1" x:Name="Teams" ItemsSource="{Binding TeamsView, UpdateSourceTrigger=PropertyChanged}"
                   SelectedItem="{Binding SelectedTeam}" Style="{StaticResource GreenListView}">
             <ListView.ContextMenu>
                 <!--Контесктное меню-->
                 <ContextMenu >
-                    <MenuItem Header="Изменить/Удалить" Command="{Binding Path=bOpenSelectedItem_Command}"/>
+                    <MenuItem Header="Подробнее" Command="{Binding Path=bInfoSelectedPlayer_Command}"/>
+                    <MenuItem Header="Удалить" Command="{Binding Path=bRemoveItem_Command}"/>
                 </ContextMenu>
             </ListView.ContextMenu>
             <ListView.View>

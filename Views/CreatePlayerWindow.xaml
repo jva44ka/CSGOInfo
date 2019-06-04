@@ -30,7 +30,7 @@
         <ComboBox FontSize="24" Grid.Column="3" Grid.Row="3" 
                   ItemsSource="{Binding ListOfTeams.List}"
                   DisplayMemberPath="Name"
-                  SelectedItem="{Binding Path=NewPlayer.Team}"/>
+                  SelectedItem="{Binding Path=NewPlayer.Team, Mode=TwoWay}"/>
         <Button Grid.Row="4" Content="Назад" FontSize="24" Margin="10" Click="bClose_Click" Style="{StaticResource GreenButton}"/>
         <Button Grid.Column="1" Grid.Row="4" Content="Добавить" FontSize="24" Margin="10" Command="{Binding bAdd_Command}" 
                 Style="{StaticResource GreenButton}"/>

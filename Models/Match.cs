@@ -12,9 +12,16 @@ namespace WpfLawyersSystem.Models
 {
     public class Match
     {
+        [XmlIgnore]
         Team _team1;
+
+        [XmlIgnore]
         Team _team2;
+
+        [XmlIgnore]
         Team _winner;
+
+        [XmlIgnore]
         public Team Team1
         {
             get { return _team1; }
@@ -23,6 +30,8 @@ namespace WpfLawyersSystem.Models
                 _team1 = value;
             }
         }
+
+        [XmlIgnore]
         public Team Team2
         {
             get { return _team2; }
@@ -31,6 +40,8 @@ namespace WpfLawyersSystem.Models
                 _team2 = value;
             }
         }
+
+        [XmlIgnore]
         public Team Winner
         {
             get { return _winner; }
@@ -39,6 +50,13 @@ namespace WpfLawyersSystem.Models
                 _winner = value;
             }
         }
+
+        //Для серриализации
+        public int id_Serialization { get; set; }
+        public int team1Id_Serialization { get; set; }
+        public int team2Id_Serialization { get; set; }
+        public int teamWinnerId_Serialization { get; set; }
+        //
 
         public Match()
         {
@@ -57,30 +75,22 @@ namespace WpfLawyersSystem.Models
 
     public class ListOfMatches
     {
-        private ObservableCollection<Match> _list;
-        public ObservableCollection<Match> List
-        {
-            get { return _list; }
-            set
-            {
-                _list = value;
-            }
-        }
+        public ObservableCollection<Match> List { get; set; }
 
         public ListOfMatches()
         {
-            _list = new ObservableCollection<Match>();
+            List = new ObservableCollection<Match>();
         }
 
         public ListOfMatches(ObservableCollection<Match> ListParam = null)
         {
-            _list = new ObservableCollection<Match>();
+            List = new ObservableCollection<Match>();
             Team team1 = new Team("NaVi", 1.05, 15, 20);
             Team team2 = new Team("FaZe", 1.12, 22, 10);
             Match somematch = new Match(team1, team2, team1);
-            _list.Add(somematch);
+            List.Add(somematch);
             somematch = new Match(team2, team1, team2);
-            _list.Add(somematch);
+            List.Add(somematch);
             //Обычный конструктор
             /*for (int i = 0; i < ListParam.Count; i++)
             {

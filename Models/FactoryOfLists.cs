@@ -117,6 +117,34 @@ namespace WpfLawyersSystem.Models
         /// <summary>
         /// /// Методы сохранения и загрузки данных из файла
         /// </summary>
+        public static void SerializeAbstract<ListType>(ListType list, string way)
+        {
+            var formatter = new XmlSerializer(list.GetType());
+            // PreserveObjectReferences true разрешает цикличные ссылки (ссылки объектов друг на друга)
+            using (Stream fs = new FileStream(way, FileMode.Create, FileAccess.Write))
+            {
+                formatter.Serialize(fs, list);
+            }
+        }
+        public static void DeserializeAbstract<ListType>(ListType list, string way)
+        {
+            if (File.Exists(way))
+            {
+                using (FileStream fs = new FileStream(way, FileMode.Open, FileAccess.Read))
+                {
+                    try
+                    {
+                        XmlSerializer formatter = new XmlSerializer(list.GetType());
+                        list = (ListType)formatter.Deserialize(fs);// as ListType;
+                    }
+                    catch (InvalidOperationException e)
+                    {
+                        MessageBox.Show(string.Format("Ошибка при загрузке(дессериализации) {0}: {1}", way, e.Message), "Ошибка", MessageBoxButton.OK);
+                    }
+                }
+            }
+        }
+
         public static void SerializeMatches(string way = @"..\..\DataBase\Matches.xml")
         {
             var formatter = new DataContractSerializer(ObjMatches.GetType(), new DataContractSerializerSettings { PreserveObjectReferences = true});
@@ -129,7 +157,6 @@ namespace WpfLawyersSystem.Models
         public static void SerializePlayers(string way = @"..\..\DataBase\Players.xml")
         {
             var formatter = new DataContractSerializer(ObjPlayers.GetType(), new DataContractSerializerSettings { PreserveObjectReferences = true });
-            //XmlSerializer formatter = new XmlSerializer(ObjPlayers.GetType());
             using (FileStream fs = new FileStream(way, FileMode.Create, FileAccess.Write))
             {
                 formatter.WriteObject(fs, _objPlayers);
@@ -171,8 +198,8 @@ namespace WpfLawyersSystem.Models
                 {
                     try
                     {
-                        DataContractSerializer formatter = new DataContractSerializer(ObjMatches.GetType());
-                        ObjMatches = formatter.ReadObject(fs) as ListOfMatches;
+                        XmlSerializer formatter = new XmlSerializer(ObjMatches.GetType());
+                        ObjMatches = formatter.Deserialize(fs) as ListOfMatches;
                     }
                     catch (InvalidOperationException e)
                     {
@@ -189,9 +216,8 @@ namespace WpfLawyersSystem.Models
                 {
                     try
                     {
-                        DataContractSerializer formatter = new DataContractSerializer(ObjPlayers.GetType(),
-                            new DataContractSerializerSettings { PreserveObjectReferences = true });
-                        ObjPlayers = formatter.ReadObject(fs) as ListOfPlayers;
+                        XmlSerializer formatter = new XmlSerializer(ObjPlayers.GetType());
+                        ObjPlayers = formatter.Deserialize(fs) as ListOfPlayers;
                     }
                     catch (InvalidOperationException e)
                     {
@@ -208,8 +234,8 @@ namespace WpfLawyersSystem.Models
                 {
                     try
                     {
-                        DataContractSerializer formatter = new DataContractSerializer(ObjTeams.GetType());
-                        ObjTeams = (ListOfTeams)formatter.ReadObject(fs);
+                        XmlSerializer formatter = new XmlSerializer(ObjTeams.GetType());
+                        ObjTeams = formatter.Deserialize(fs) as ListOfTeams;
                     }
                     catch (InvalidOperationException e)
                     {
@@ -226,8 +252,8 @@ namespace WpfLawyersSystem.Models
                 {
                     try
                     {
-                        DataContractSerializer formatter = new DataContractSerializer(ObjTop.GetType());
-                        ObjTop = (Top10)formatter.ReadObject(fs);
+                        XmlSerializer formatter = new XmlSerializer(ObjTop.GetType());
+                        ObjTop = formatter.Deserialize(fs) as Top10;
                     }
                     catch (InvalidOperationException e)
                     {
@@ -244,8 +270,8 @@ namespace WpfLawyersSystem.Models
                 { // Отладчик сказал что так можно делать и файл закроется без обязательного закрытия его в Finnally?
                     try
                     {
-                        DataContractSerializer formatter = new DataContractSerializer(ObjTournaments.GetType());
-                        ObjTournaments = (ListOfTournaments)formatter.ReadObject(fs);
+                        XmlSerializer formatter = new XmlSerializer(ObjTournaments.GetType());
+                        ObjTournaments = formatter.Deserialize(fs) as ListOfTournaments;
                     }
                     catch (InvalidOperationException e)
                     {
@@ -258,19 +284,120 @@ namespace WpfLawyersSystem.Models
 
         public static void Save()
         {
-            SerializeMatches();
+            //Раздача собственных id
+            for (int i = 0; i < ObjMatches.List.Count; i++) ObjMatches.List[i].id_Serialization = i;
+            for (int i = 0; i < ObjPlayers.List.Count; i++) ObjPlayers.List[i].id_Serialization = i;
+            for (int i = 0; i < ObjTeams.List.Count; i++) ObjTeams.List[i].id_Serialization = i;
+            for (int i = 0; i < ObjTop.Top.Count; i++) ObjTop.Top[i].id_Serialization = i;
+            for (int i = 0; i < ObjTournaments.List.Count; i++) ObjTournaments.List[i].id_Serialization = i;
+
+            ///Раздача внешних ключей
+            //Матчам
+            for (int i = 0; i < ObjMatches.List.Count; i++)
+            {
+                ObjMatches.List[i].team1Id_Serialization = ObjMatches.List[i].Team1.id_Serialization;
+                ObjMatches.List[i].team2Id_Serialization = ObjMatches.List[i].Team2.id_Serialization;
+                ObjMatches.List[i].teamWinnerId_Serialization = ObjMatches.List[i].Winner.id_Serialization;
+            }
+
+            //Игрокам
+            for (int i = 0; i < ObjPlayers.List.Count; i++)
+            {
+                ObjPlayers.List[i].teamId_Serialization = ObjPlayers.List[i].Team.id_Serialization;
+            }
+
+            //Командам
+            for (int i = 0; i < ObjTeams.List.Count; i++)
+            {
+                ObjTeams.List[i].playersIds_Serialization = new int[ObjTeams.List[i].TheCrew.Count];
+                for (int k = 0; k < ObjTeams.List[i].TheCrew.Count; k++)
+                {
+                    ObjTeams.List[i].playersIds_Serialization[k] = ObjTeams.List[i].TheCrew[k].id_Serialization;
+                }
+            }
+
+            //Топам
+            ObjTop.teamIds_Serialization = new int[ObjTop.Top.Count];
+            for (int i = 0; i < ObjTop.Top.Count; i++)
+            {
+                ObjTop.teamIds_Serialization[i] = ObjTop.Top[i].id_Serialization;
+            }
+
+            //Турнирам
+            for (int i = 0; i < ObjTournaments.List.Count; i++)
+            {
+                ObjTournaments.List[i].matchesIds_Serialization = new int[ObjTournaments.List[i].Matches.Count];
+                for (int k = 0; k < ObjTournaments.List[i].Matches.Count; k++)
+                {
+                    ObjTournaments.List[i].matchesIds_Serialization[k] = ObjTournaments.List[i].Matches[k].id_Serialization;
+                }
+            } 
+
+            SerializeAbstract(ObjMatches, @"..\..\DataBase\Matches.xml");
+            SerializeAbstract(ObjPlayers, @"..\..\DataBase\Players.xml");
+            SerializeAbstract(ObjTeams, @"..\..\DataBase\Teams.xml");
+            SerializeAbstract(ObjTop, @"..\..\DataBase\Top.xml");
+            SerializeAbstract(ObjTournaments, @"..\..\DataBase\Tournaments.xml");
+            /*SerializeMatches();
             SerializePlayers();
             SerializeTeams();
             SerializeTop();
-            SerializeTournaments();
+            SerializeTournaments();*/
+
         }
         public static void Load()
         {
+
             DeserializeMatches();
             DeserializePlayers();
             DeserializeTeams();
             DeserializeTop();
             DeserializeTournaments();
+
+            ///Раздача внешних ключей
+            //Матчам
+            for (int i = 0; i < ObjMatches.List.Count; i++)
+            {
+                ObjMatches.List[i].Team1 = ObjTeams.List.ToList().Find(item => item.id_Serialization == ObjMatches.List[i].team1Id_Serialization);
+                ObjMatches.List[i].Team2 = ObjTeams.List.ToList().Find(item => item.id_Serialization == ObjMatches.List[i].team2Id_Serialization);
+                ObjMatches.List[i].Winner = ObjTeams.List.ToList().Find(item => item.id_Serialization == ObjMatches.List[i].teamWinnerId_Serialization);
+            }
+
+            //Игрокам
+            for (int i = 0; i < ObjPlayers.List.Count; i++)
+            {
+                ObjPlayers.List[i].Team = ObjTeams.List.ToList().Find(item => item.id_Serialization == ObjPlayers.List[i].teamId_Serialization);
+            }
+
+            //Командам
+            for (int i = 0; i < ObjTeams.List.Count; i++)
+            {
+                for (int k = 0; k < ObjTeams.List[i].playersIds_Serialization.Length; k++)
+                {
+                    ObjTeams.List[i].TheCrew.Add(ObjPlayers.List.ToList().Find(item => item.teamId_Serialization == ObjTeams.List[i].id_Serialization));
+                }
+            }
+
+            //Топам
+            for (int i = 0; i < ObjTop.Top.Count; i++)
+            {
+                ObjTop.teamIds_Serialization[i] = ObjTop.Top[i].id_Serialization;
+                ObjTop.Top[i] = ObjTeams.List.ToList().Find(item => item.id_Serialization == ObjTop.Top[i].id_Serialization);
+            }
+
+            //Турнирам
+            for (int i = 0; i < ObjTournaments.List.Count; i++)
+            {
+                for (int k = 0; k < ObjTournaments.List[i].matchesIds_Serialization.Length; k++)
+                {
+                    ObjTournaments.List[i].Matches.Add(ObjMatches.List.ToList().Find(item => item.id_Serialization == ObjMatches.List[i].id_Serialization));
+                }
+            }
+            /*DeserializeMatches();
+            DeserializePlayers();
+            DeserializeTeams();
+            DeserializeTop();
+            DeserializeTournaments();*/
         }
     }
 }

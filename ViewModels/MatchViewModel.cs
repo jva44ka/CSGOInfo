@@ -9,7 +9,7 @@ using WpfLawyersSystem.Models;
 
 namespace WpfLawyersSystem.ViewModels
 {
-    public class MatchViewModel : NotifycationsPropertyChanged
+    public class MatchViewModel : BaseViewModel
     {
         private ListOfMatches _listOfMatches;
         private string _searchText;

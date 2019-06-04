@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Xml.Serialization;
 
 namespace WpfLawyersSystem.Models
@@ -16,6 +17,8 @@ namespace WpfLawyersSystem.Models
         double _rating;
         int _wins;
         int _loses;
+
+        [XmlIgnore]
         ObservableCollection<Player> _theCrew;
 
         public string Name {
@@ -43,6 +46,8 @@ namespace WpfLawyersSystem.Models
                 _loses = value;
             }
         }
+
+        [XmlIgnore]
         public ObservableCollection<Player> TheCrew {
             get { return _theCrew; }
             set
@@ -51,8 +56,17 @@ namespace WpfLawyersSystem.Models
                 {
                     _theCrew = value;
                 }
+                else
+                {
+                    MessageBox.Show("Команда имеет более 5 игроков");
+                }
             }
         }
+
+        // Для серриализации
+        public int id_Serialization { get; set; }
+        public int[] playersIds_Serialization { get; set; }
+        //
 
         public Team()
         {
@@ -87,49 +101,16 @@ namespace WpfLawyersSystem.Models
 
     public class ListOfTeams
     {
-        private ObservableCollection<Team> _list;
-        public ObservableCollection<Team> List
-        {
-            get
-            {
-                return _list;
-            }
-            set
-            {
-                _list = value;
-            }
-        }
+        public ObservableCollection<Team> List { get; set; }
 
         public ListOfTeams()
         {
-            _list = new ObservableCollection<Team>();
+            List = new ObservableCollection<Team>();
         }
 
         public ListOfTeams(ObservableCollection<Team> ListParam = null)
         {
-            _list = ListParam;
-        }
-        public ListOfTeams FindName(string qwerry)//Поиск по имени
-        {
-            if (qwerry != "")
-            {
-                //resultList = new List<Player>().AsEnumerable<Player>();
-                var resultList = from item in this.List
-                                 where item.Name.ToLower().Contains(qwerry.ToLower())
-                                 select item;
-
-
-
-                /*foreach (var item in this.List)
-                {
-
-                }*/
-                return new ListOfTeams(new ObservableCollection<Team>(resultList));
-            }
-            else
-            {
-                return this;
-            }
+            List = ListParam;
         }
     }
 }

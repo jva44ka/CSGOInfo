@@ -10,15 +10,13 @@
       d:DesignHeight="450" d:DesignWidth="600"
       Title="PlayerPage">
     <!-- " xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" " дает i -->
-    <Page.DataContext>
-        <vm:PlayerViewModel/>
-    </Page.DataContext>
+    
     <Page.Resources>
         <!--<Style x:Key="itemsStyle" TargetType="{x:Type ListViewItem}">
             <EventSetter Event='MouseDoubleClick' Handler='bChangeItem_Click'/>
         </Style>-->
     </Page.Resources>
-
+    
     <Grid Background="{StaticResource MediumGreenBrush}">
         <Grid.RowDefinitions>
             <RowDefinition MinHeight="40" Height="1*"/>
@@ -34,7 +32,8 @@
             <ListView.ContextMenu>
                 <!--Контесктное меню-->
                 <ContextMenu >
-                    <MenuItem Header="Изменить/Удалить" Command="{Binding Path=bOpenSelectedItem_Command}"/>
+                    <MenuItem Header="Подробнее" Command="{Binding Path=bInfoSelectedPlayer_Command}"/>
+                    <MenuItem Header="Удалить" Command="{Binding Path=bRemovePlayer_Command}"/>
                 </ContextMenu>
             </ListView.ContextMenu>
             <ListView.View>

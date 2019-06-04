@@ -1,5 +1,6 @@
-﻿using System;
-using System.Collections;
+﻿using GalaSoft.MvvmLight.Command;
+using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -9,23 +10,16 @@ using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Input;
 using WpfLawyersSystem.Models;
-using DevExpress.Mvvm;
 
 namespace WpfLawyersSystem.ViewModels
 {
     public class OneTeamViewModel : BaseViewModel
     {
-        /// <summary>
-        /// Поля
-        /// </summary>
-        Team _newTeam; // новая команда
+
+        Team _newTeam;
         Player[] _players; //игроки для подвязки к View
         bool[] _switchers; // флаг созданности того или иного игрока в составе newTeam. true = существует
-        Team _selectedTeam; // выбранная команда (для изменения)
-
-        /// <summary>
-        /// /////////Свойства
-        /// </summary>
+        Team _selectedTeam;
         public Team NewTeam
         {
             get { return _newTeam; }
@@ -63,21 +57,16 @@ namespace WpfLawyersSystem.ViewModels
                 base.OnPropertyChanged();
             }
         }
-
-        /// <summary>
-        /// //////// Конструкторы
-        /// </summary>
         public OneTeamViewModel()
         {
             _newTeam = new Team();
             _players = new Player[5];
-            _switchers = new bool[5]; 
+            _switchers = new bool[5];
             ButtonPlayersContent = new ObservableCollection<string>();
             for (int i = 0; i < 5; i++)
             {
                 _switchers[i] = false;
                 _players[i] = new Player();
-                _players[i].Team = _newTeam;
                 ButtonPlayersContent.Add("Создать");
             }
         }
@@ -87,31 +76,25 @@ namespace WpfLawyersSystem.ViewModels
             _switchers = new bool[5];
             _players = new Player[5];
             ButtonPlayersContent = new ObservableCollection<string>();
-            for (int i = 0; i < _selectedTeam.TheCrew.Count; i++)
-            {
-                _switchers[i] = true;
-                ButtonPlayersContent.Add("Удалить");
-                _players[i] = _selectedTeam.TheCrew[i];
-            }
-            for (int i = _selectedTeam.TheCrew.Count; i < 5; i++)
+            for (int i = 0; i < 5; i++)
             {
                 _switchers[i] = false;
                 ButtonPlayersContent.Add("Создать");
-                _players[i] = new Player();
-                _players[i].Team = _selectedTeam;
+            }
+            for (int i = 0; i < _selectedTeam.TheCrew.Count; i++)
+            {
+                _switchers[i] = true;
+                ButtonPlayersContent[i] = "Удалить";
+                _players[i] = _selectedTeam.TheCrew[i];
             }
         }
-
-        /// <summary>
-        /// ////// Команды
-        /// </summary>
         public ICommand bAdd_Command
         {
             get
             {
-                return new DelegateCommand(() =>
+                return new RelayCommand(() =>
                 {
-                    FactoryOfLists.ObjTeams.List.Add(NewTeam);
+                    FactoryOfLists.ObjTeams.List.Add(new Team(NewTeam));
                 });
             }
         }
@@ -120,42 +103,35 @@ namespace WpfLawyersSystem.ViewModels
         {
             get
             {
-                return new DelegateCommand(() =>
+                return new RelayCommand(() =>
                 FactoryOfLists.ObjTeams.List.Remove(_selectedTeam)
                 );
             }
         }
 
-        public ICommand bCreateOrDeletePlayer_Command
+        public ICommand bAddPlayerInTeam_Command
         {
             get
             {
-                return new DelegateCommand<string>((param) =>
+                return new RelayCommand<string>((param) =>
                 {
-                    int playerNum = int.Parse(param); // Какого игрока меняем / удаляем
-                    Team thisTeam; // Меняем или удаляем?
-
-                    _ = SelectedTeam != null ? thisTeam = SelectedTeam : thisTeam = NewTeam;
-
+                    int playerNum = int.Parse(param);
                     if (Swithers[playerNum] == false)
                     { //проверка создан ли игрок
-                        thisTeam.TheCrew.Add(Players[playerNum]);
+                        Players[playerNum] = new Player("", 0, 0, NewTeam);
+                        _newTeam.TheCrew.Add(Players[playerNum]);
                         Swithers[playerNum] = true;
-                        ButtonPlayersContent[playerNum] = "Удалить";
+                        ButtonPlayersContent[playerNum] = "Удалить";////////////
                         FactoryOfLists.ObjPlayers.List.Add(Players[playerNum]);
                     }
                     else
                     {
-                        int[] array = new int[5];
-                        //thisTeam.TheCrew.Remove(Players[playerNum]);
-                        Players[playerNum] = new Player();
-                        Players[playerNum].Team = thisTeam;
+                        _newTeam.TheCrew.Remove(Players[playerNum]);
+                        Players[playerNum] = ;
                         Swithers[playerNum] = false;
-                        ButtonPlayersContent[playerNum] = "Создать";
+                        ButtonPlayersContent[playerNum] = "Создать";/////////////
                         FactoryOfLists.ObjPlayers.List.Remove(Players[playerNum]);
-                        thisTeam.TheCrew.Remove(Players[playerNum]);
                     }
-                    OnPropertyChanged(thisTeam.Name);
                 });
             }
         }

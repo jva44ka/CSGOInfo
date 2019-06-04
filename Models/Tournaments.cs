@@ -14,7 +14,9 @@ namespace WpfLawyersSystem.Models
     {
         string _name;
         DateTime _date;
+        [XmlIgnore]
         Player _mvp;
+        [XmlIgnore]
         ObservableCollection<Match> _matches;
 
         public string Name
@@ -33,6 +35,7 @@ namespace WpfLawyersSystem.Models
                 _date = value;
             }
         }
+        [XmlIgnore]
         public Player Mvp
         {
             get { return _mvp; }
@@ -41,6 +44,7 @@ namespace WpfLawyersSystem.Models
                 _mvp = value;
             }
         }
+        [XmlIgnore]
         public ObservableCollection<Match> Matches
         {
             get { return _matches; }
@@ -49,6 +53,12 @@ namespace WpfLawyersSystem.Models
                 _matches = value;
             }
         }
+
+        //для серриализации
+        public int id_Serialization { get; set; }
+        public int mvpId_Serialization { get; set; }
+        public int[] matchesIds_Serialization { get; set; }
+        //
 
         public Tournament() // Из-за datatime пришлось разделить гибридный конструктор на 2
         {
@@ -69,26 +79,18 @@ namespace WpfLawyersSystem.Models
 
     public class ListOfTournaments
     {
-        private ObservableCollection<Tournament> _list;
-        public ObservableCollection<Tournament> List
-        {
-            get { return _list; }
-            set
-            {
-                _list = value;
-            }
-        }
+        public ObservableCollection<Tournament> List { get; set; }
 
         public ListOfTournaments()
         {
-            _list = new ObservableCollection<Tournament>();
+            List = new ObservableCollection<Tournament>();
         }
 
         public ListOfTournaments(ObservableCollection<Tournament> list)
         {
             for (int i = 0; i < list.Count; i++)
             {
-                _list.Add(list[i]);
+                List.Add(list[i]);
             }
         }
     }

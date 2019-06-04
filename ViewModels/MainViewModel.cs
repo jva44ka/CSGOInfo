@@ -10,18 +10,16 @@ using System.Threading;
 using System.Windows.Input;
 using System.Collections.ObjectModel;
 using Mvvm;
-using LightMessageBus;
 
 using WpfLawyersSystem.Models;
 using WpfLawyersSystem.Views;
-using GalaSoft.MvvmLight.Command;
 using System.Diagnostics;
 using DevExpress.Mvvm;
 using CommonServiceLocator;
 
 namespace WpfLawyersSystem.ViewModels
 {
-    class MainViewModel : NotifycationsPropertyChanged
+    class MainViewModel : BaseViewModel
     {
         //страницы (таблицы из бд)
         private Page _matchMV;
@@ -29,6 +27,12 @@ namespace WpfLawyersSystem.ViewModels
         private Page _teamMV;
         private Page _top10MV;
         private Page _tournamentMV;
+
+        //Поля для передачи ссылки vm для изменения запроса
+        PlayerViewModel playerViewModelInstaince;
+        TeamViewModel teamViewModelInstaince;
+        MatchViewModel matchViewModelInstaince;
+        TournamentsViewModel tournamentsViewModelInstaince;
 
         //Прочие поля
         private string _searchText; //Поле для ввода поискового запроса
@@ -107,17 +111,12 @@ namespace WpfLawyersSystem.ViewModels
             }
         }
 
-        //Поля для передачи ссылки vm для изменения запроса
-        PlayerViewModel playerViewModelInstaince;
-        TeamViewModel teamViewModelInstaince;
-        MatchViewModel matchViewModelInstaince;
-        TournamentsViewModel tournamentsViewModelInstaince;
-
         public MainViewModel()
         {//Конструктор
             _matchMV = new Views.MatchPage(out matchViewModelInstaince);
-            _playerMV = new Views.PlayerPage(out playerViewModelInstaince);
-            _teamMV = new Views.TeamPage(out teamViewModelInstaince);
+            //_playerMV = new Views.PlayerPage(out playerViewModelInstaince);
+            _playerMV = new Views.PlayerCoverPage(out playerViewModelInstaince);//
+            _teamMV = new Views.TeamCoverPage(out teamViewModelInstaince);
             _top10MV = new Views.Top10Page();
             _tournamentMV = new Views.TournamentPage(out tournamentsViewModelInstaince);
             _frameOpacity = 1;
@@ -131,43 +130,42 @@ namespace WpfLawyersSystem.ViewModels
         {
             get
             {
-                return new RelayCommand(() => ChangeAnimated(_matchMV, "Введите название одной из команд"));
+                return new DelegateCommand(() => ChangeAnimated(_matchMV, "Введите название одной из команд"));
             }
         }
         public ICommand bMenuPlayer_Command
         {
             get
             {
-                return new RelayCommand(() => ChangeAnimated(_playerMV, "Введите имя игрока"));
+                return new DelegateCommand(() => ChangeAnimated(_playerMV, "Введите имя игрока"));
             }
         }
         public ICommand bMenuTeam_Command
         {
             get
             {
-                return new RelayCommand(() => ChangeAnimated(_teamMV, "Введите название команды"));
+                return new DelegateCommand(() => ChangeAnimated(_teamMV, "Введите название команды"));
             }
         }
         public ICommand bMenuTop10_Command
         {
             get
             {
-                return new RelayCommand(() => ChangeAnimated(_top10MV, "Введите название команды"));
+                return new DelegateCommand(() => ChangeAnimated(_top10MV, "Введите название команды"));
             }
         }
         public ICommand bMenuTournament_Command
         {
             get
             {
-                return new RelayCommand(() => ChangeAnimated(_tournamentMV, "Введите название турнира"));
+                return new DelegateCommand(() => ChangeAnimated(_tournamentMV, "Введите название турнира"));
             }
         }
-
         public ICommand bAddRecord_Click
         { // Выбирает окно для создания item в ListView
             get
             {
-                return new RelayCommand(() =>
+                return new DelegateCommand(() =>
                 {
                     if (_curretPage == _playerMV)
                     {
@@ -183,39 +181,7 @@ namespace WpfLawyersSystem.ViewModels
             }
         }
 
-        /*public ICommand TBChangingText_Command
-        { // Выбирает окно для создания item в ListView
-            get
-            {
-                return new RelayCommand(() =>
-                {
-                    if (_curretPage == _playerMV)
-                    {
-                        Views.CreatePlayerWindow newWindow = new Views.CreatePlayerWindow();
-                        newWindow.ShowDialog();
-                    }
-                    if (_curretPage == _teamMV)
-                    {
-                        Views.CreateTeamWindow newWindow = new Views.CreateTeamWindow();
-                        newWindow.ShowDialog();
-                    }
-                    if (_curretPage == _matchMV)
-                    {
-                        
-                    }
-                    if (_curretPage == _top10MV)
-                    {
-                        
-                    }
-                    if (_curretPage == _tournamentMV)
-                    {
-                        
-                    }
-                });
-            }
-        }*/
-
-        private async void ChangeAnimated(Page page, string QwerryParam) // Анимация и смена страницы
+        private async void ChangeAnimated(Page page, string QwerryParam) // Анимация и смена страницы. Qwerry - запрос в строке запроса в зависимости от активной таблицы
         {
             await Task.Factory.StartNew(() =>
             {

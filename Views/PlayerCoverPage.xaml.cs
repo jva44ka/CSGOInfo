@@ -17,13 +17,16 @@ using WpfLawyersSystem.ViewModels;
 namespace WpfLawyersSystem.Views
 {
     /// <summary>
-    /// Логика взаимодействия для TeamPage.xaml
+    /// Логика взаимодействия для PlayerCoverPage.xaml
     /// </summary>
-    public partial class TeamPage : Page
+    public partial class PlayerCoverPage : Page
     {
-        public TeamPage()
+        public PlayerCoverPage(out PlayerViewModel DataContextParam)
         {
             InitializeComponent();
+            ViewModels.PlayerViewModel vm = new ViewModels.PlayerViewModel();
+            DataContext = vm;
+            DataContextParam = vm;
         }
     }
 }
