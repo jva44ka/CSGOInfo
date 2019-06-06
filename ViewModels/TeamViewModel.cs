@@ -143,9 +143,15 @@ namespace WpfLawyersSystem.ViewModels
             {
                 return new DelegateCommand(() =>
                 {
-                    foreach (var item in SelectedTeam.TheCrew)
+                    if (SelectedTeam.TheCrew != null)
                     {
-                        item.Team = null;
+                        foreach (var item in SelectedTeam.TheCrew)
+                        {
+                            if (item != null)
+                            {
+                                item.Team = null;
+                            }
+                        }
                     }
                     FactoryOfLists.ObjTeams.List.Remove(SelectedTeam);
                     ChangePageAnimated(_teamsListPage);

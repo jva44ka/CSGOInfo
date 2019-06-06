@@ -67,7 +67,7 @@ namespace WpfLawyersSystem.ViewModels
                 }
                 if (_curretPage == _tournamentMV)
                 {
-
+                    tournamentsViewModelInstaince.SearchText = value;
                 }
                 _searchText = value;
                 //playerViewModelInstaince.SearchText = value;
@@ -113,12 +113,12 @@ namespace WpfLawyersSystem.ViewModels
 
         public MainViewModel()
         {//Конструктор
-            _matchMV = new Views.MatchPage(out matchViewModelInstaince);
+            _matchMV = new Views.MatchCoverPage(out matchViewModelInstaince);
             //_playerMV = new Views.PlayerPage(out playerViewModelInstaince);
             _playerMV = new Views.PlayerCoverPage(out playerViewModelInstaince);//
             _teamMV = new Views.TeamCoverPage(out teamViewModelInstaince);
-            _top10MV = new Views.Top10Page();
-            _tournamentMV = new Views.TournamentPage(out tournamentsViewModelInstaince);
+            //_top10MV = new Views.Top10Page();
+            _tournamentMV = new Views.TournamentCoverPage(out tournamentsViewModelInstaince);
             _frameOpacity = 1;
             _curretPage = _playerMV;
             _qwerryLabel = "Введите имя игрока";
@@ -130,35 +130,56 @@ namespace WpfLawyersSystem.ViewModels
         {
             get
             {
-                return new DelegateCommand(() => ChangeAnimated(_matchMV, "Введите название одной из команд"));
+                return new DelegateCommand(() => 
+                {
+                    QwerryLabel = "Введите название одной из команд";
+                    ChangeAnimated(_matchMV);
+                });
             }
         }
         public ICommand bMenuPlayer_Command
         {
             get
             {
-                return new DelegateCommand(() => ChangeAnimated(_playerMV, "Введите имя игрока"));
+                return new DelegateCommand(() =>
+                {
+                    QwerryLabel = "Введите имя игрока";
+                    ChangeAnimated(_playerMV);
+                });
             }
         }
         public ICommand bMenuTeam_Command
         {
             get
             {
-                return new DelegateCommand(() => ChangeAnimated(_teamMV, "Введите название команды"));
+                return new DelegateCommand(() =>
+                {
+                    QwerryLabel = "Введите название команды";
+                    ChangeAnimated(_teamMV);
+                });
             }
         }
         public ICommand bMenuTop10_Command
         {
             get
             {
-                return new DelegateCommand(() => ChangeAnimated(_top10MV, "Введите название команды"));
+                return new DelegateCommand(() =>
+                {
+                    QwerryLabel = "Введите название команды";
+                    ChangeAnimated(_top10MV);
+                });
             }
         }
         public ICommand bMenuTournament_Command
         {
             get
             {
-                return new DelegateCommand(() => ChangeAnimated(_tournamentMV, "Введите название турнира"));
+                return new DelegateCommand(() => 
+                {
+                    QwerryLabel = "Введите название турнира";
+                    ChangeAnimated(_tournamentMV);
+                });
+
             }
         }
         public ICommand bAddRecord_Click
@@ -177,17 +198,24 @@ namespace WpfLawyersSystem.ViewModels
                         CreateTeamWindow newWindow = new CreateTeamWindow();
                         newWindow.ShowDialog();
                     }
+                    if (_curretPage == _matchMV)
+                    {
+                        matchViewModelInstaince.OpenCreatingWindow();
+                    }
+                    if (_curretPage == _tournamentMV)
+                    {
+                        tournamentsViewModelInstaince.OpenCreatingWindow();
+                    }
                 });
             }
         }
 
-        private async void ChangeAnimated(Page page, string QwerryParam) // Анимация и смена страницы. Qwerry - запрос в строке запроса в зависимости от активной таблицы
+        private async void ChangeAnimated(Page page) // Анимация и смена страницы. Qwerry - запрос в строке запроса в зависимости от активной таблицы
         {
             await Task.Factory.StartNew(() =>
             {
                 if (CurretPage != page)
                 {
-                    QwerryLabel = QwerryParam;
                     for (double i = 1.0; i <= 0.0; i -= 0.1)
                     {
                         FrameOpacity = i;

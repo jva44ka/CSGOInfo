@@ -8,6 +8,7 @@ using System.Windows.Input;
 using WpfLawyersSystem.Models;
 using DevExpress.Mvvm;
 using WpfLawyersSystem.Views;
+using System.Windows.Controls;
 
 namespace WpfLawyersSystem.ViewModels
 {
@@ -34,6 +35,28 @@ namespace WpfLawyersSystem.ViewModels
                 base.OnPropertyChanged();
             }
         }
+        public Team SelectedPlayerTeam
+        {
+            get { return _selectedPlayer.Team; }
+            set
+            {
+                SelectedPlayer.Team.TheCrew.Remove(SelectedPlayer);
+                SelectedPlayer.Team = value;
+                
+                value.TheCrew.Add(SelectedPlayer);
+                /*
+                if (SelectedPlayer.Team.TheCrew != null)
+                {
+                    foreach (var item in SelectedPlayer.Team.TheCrew)
+                    {
+                        item.Team = SelectedPlayer.Team;
+                    }
+                }
+                */
+                base.OnPropertyChanged();
+                base.OnPropertyChanged("SelectedPlayer.Team");
+            }
+        }
 
         public ListOfTeams ListOfTeams
         {
@@ -48,12 +71,11 @@ namespace WpfLawyersSystem.ViewModels
         public OnePlayerViewModel() //ctor
         {
             _newPlayer = new Player();
-            //_selectedPlayer = new Player();
             _listOfTeams = FactoryOfLists.ObjTeams;
         }
+
         public OnePlayerViewModel(Player player) //ctorParam
         {
-            //_newPlayer = new Player();
             _selectedPlayer = player;
             _listOfTeams = FactoryOfLists.ObjTeams;
         }
@@ -62,10 +84,11 @@ namespace WpfLawyersSystem.ViewModels
         {
             get
             {
-                return new DelegateCommand(() =>
-                {
+                return new DelegateCommand<Window>((w) =>
+                { // o - параметр, окно, из которого произошел вызов команды по кнопке
                     NewPlayer.Team.TheCrew.Add(_newPlayer);
                     FactoryOfLists.ObjPlayers.List.Add(NewPlayer);
+                    w.Close();
                 });
             }
         }
@@ -78,6 +101,14 @@ namespace WpfLawyersSystem.ViewModels
                     SelectedPlayer.Team.TheCrew.Remove(_selectedPlayer);
                     FactoryOfLists.ObjPlayers.List.Remove(SelectedPlayer);
                 });
+            }
+        }
+
+        public ICommand bClose_Command
+        {
+            get
+            {
+                return new DelegateCommand<Window>((w) => { w.Close(); } );
             }
         }
     }

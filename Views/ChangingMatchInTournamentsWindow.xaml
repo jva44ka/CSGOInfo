@@ -1,0 +1,33 @@
+﻿<Window x:Class="WpfLawyersSystem.Views.ChangingMatchInTournamentsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfLawyersSystem.Views"
+        mc:Ignorable="d"
+        Title="ChangingMatchInTournamentsWindow" Height="200" Width="400"
+        Background="{StaticResource MediumGreenBrush}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <ComboBox Margin="10" ItemsSource="{Binding Matches}"
+                      DisplayMemberPath="TeamWinner"
+                      SelectedItem="{Binding Path=SelectedMatch, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <Grid Grid.Row="1">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Row="1" Style="{StaticResource GreenButton}" FontSize="{StaticResource H1}" Content="Назад" 
+                    Command="{Binding bBackToList_Command}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"/>
+                <Button Grid.Row="1" Style="{StaticResource GreenButton}" FontSize="{StaticResource H1}" Content="Назад" 
+                    Command="{Binding bBackToList_Command}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"/>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

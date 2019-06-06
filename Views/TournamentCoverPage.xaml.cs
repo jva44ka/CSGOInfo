@@ -10,20 +10,22 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace WpfLawyersSystem.Views
 {
     /// <summary>
-    /// Логика взаимодействия для OnePlayerPage.xaml
+    /// Логика взаимодействия для TournamentCoverPage.xaml
     /// </summary>
-    public partial class CreatePlayerWindow : Window
+    public partial class TournamentCoverPage : Page
     {
-        public CreatePlayerWindow()
+        public TournamentCoverPage(out ViewModels.TournamentsViewModel DataContextParam)
         {
             InitializeComponent();
-            ViewModels.OnePlayerViewModel vm = new ViewModels.OnePlayerViewModel();
-            this.DataContext = vm;
+            ViewModels.TournamentsViewModel vm = new ViewModels.TournamentsViewModel();
+            DataContext = vm;
+            DataContextParam = vm;
         }
     }
 }

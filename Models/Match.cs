@@ -21,6 +21,8 @@ namespace WpfLawyersSystem.Models
         [XmlIgnore]
         Team _winner;
 
+        DateTime _time;
+
         [XmlIgnore]
         public Team Team1
         {
@@ -51,6 +53,16 @@ namespace WpfLawyersSystem.Models
             }
         }
 
+        public DateTime Time
+        {
+            get { return _time; }
+            set
+            {
+                _time = value;
+            }
+        }
+
+
         //Для серриализации
         public int id_Serialization { get; set; }
         public int team1Id_Serialization { get; set; }
@@ -63,6 +75,7 @@ namespace WpfLawyersSystem.Models
             _team1 = new Team();
             _team2 = new Team();
             _winner = new Team();
+            this._time = DateTime.Now;
         }
 
         public Match(Team team1 = null, Team team2 = null, Team winner = null)
@@ -70,6 +83,7 @@ namespace WpfLawyersSystem.Models
             this._team1 = team1;
             this._team2 = team2;
             this._winner = winner;
+            this._time = DateTime.Now;
         }
     }
 
@@ -84,18 +98,14 @@ namespace WpfLawyersSystem.Models
 
         public ListOfMatches(ObservableCollection<Match> ListParam = null)
         {
-            List = new ObservableCollection<Match>();
-            Team team1 = new Team("NaVi", 1.05, 15, 20);
-            Team team2 = new Team("FaZe", 1.12, 22, 10);
-            Match somematch = new Match(team1, team2, team1);
-            List.Add(somematch);
-            somematch = new Match(team2, team1, team2);
-            List.Add(somematch);
-            //Обычный конструктор
-            /*for (int i = 0; i < ListParam.Count; i++)
+            if (ListParam != null)
             {
-                _list.Add(ListParam[i]);
-            }*/
+                List = ListParam;
+            }
+            else
+            {
+                List = new ObservableCollection<Match>();
+            }
         }
     }
 }

@@ -29,9 +29,9 @@
             <Button Grid.Row="0" Command="{Binding bMenuTeam_Command}" Style="{StaticResource GreenButton}" Content="Team"/>
             <Button Grid.Row="1" Command="{Binding bMenuPlayer_Command}" Style="{StaticResource GreenButton}" Content="Player"/>
             <Button Grid.Row="2" Command="{Binding bMenuMatch_Command}" Style="{StaticResource GreenButton}" Content="Match"
-                    IsEnabled="False"/>
+                    IsEnabled="True"/>
             <Button Grid.Row="3" Command="{Binding bMenuTournament_Command}" Style="{StaticResource GreenButton}" Content="Tournament"
-                    IsEnabled="False"/>
+                    IsEnabled="True"/>
         </Grid>
 
         <Grid Background="{StaticResource MediumGreenBrush}" Grid.Column="1">

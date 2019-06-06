@@ -26,7 +26,5 @@ namespace WpfLawyersSystem.Views
             ViewModels.OnePlayerViewModel vm = new ViewModels.OnePlayerViewModel(player);
             this.DataContext = vm;
         }
-
-        public void bClose_Click(object sender, EventArgs e) { this.Close(); } // Закрывает окно
     }
 }

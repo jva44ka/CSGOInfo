@@ -31,8 +31,10 @@
                   ItemsSource="{Binding ListOfTeams.List}"
                   DisplayMemberPath="Name"
                   SelectedItem="{Binding Path=NewPlayer.Team, Mode=TwoWay}"/>
-        <Button Grid.Row="4" Content="Назад" FontSize="24" Margin="10" Click="bClose_Click" Style="{StaticResource GreenButton}"/>
+        <Button Grid.Row="4" Content="Назад" FontSize="24" Margin="10" Style="{StaticResource GreenButton}" Command="{Binding bClose_Command}"
+                CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"/>
         <Button Grid.Column="1" Grid.Row="4" Content="Добавить" FontSize="24" Margin="10" Command="{Binding bAdd_Command}" 
+                CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
                 Style="{StaticResource GreenButton}"/>
     </Grid>
 </Window>

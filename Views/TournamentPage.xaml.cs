@@ -20,12 +20,9 @@ namespace WpfLawyersSystem.Views
     /// </summary>
     public partial class TournamentPage : Page
     {
-        public TournamentPage(out ViewModels.TournamentsViewModel DataContextParam)
+        public TournamentPage()
         {
             InitializeComponent();
-            ViewModels.TournamentsViewModel vm = new ViewModels.TournamentsViewModel();
-            DataContext = vm;
-            DataContextParam = vm;
         }
     }
 }

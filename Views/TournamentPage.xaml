@@ -6,11 +6,9 @@
       xmlns:local="clr-namespace:WpfLawyersSystem.Views"
       xmlns:vm="clr-namespace:WpfLawyersSystem.ViewModels"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="TournamentPage">
-    <Page.DataContext>
-        <vm:TournamentsViewModel/>
-    </Page.DataContext>
+      d:DesignHeight="450" d:DesignWidth="600"
+      Title="TournamentPage"
+      Background="{StaticResource MediumGreenBrush}">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -20,7 +18,17 @@
 
         <TextBlock Grid.Row="0" TextAlignment="Center" VerticalAlignment="Center" FontSize="36" Text="Турниры"/>
 
-        <ListView Margin="10" Grid.Row="1" Name="Teams" ItemsSource="{Binding ListOfTournaments.List}">
+        <ListView Margin="10" Grid.Row="1" Name="Teams" 
+                  Style="{StaticResource GreenListView}"
+                  ItemsSource="{Binding TournamentsView, UpdateSourceTrigger=PropertyChanged}"
+                  SelectedItem="{Binding SelectedItem, UpdateSourceTrigger=PropertyChanged}">
+            <ListView.ContextMenu>
+                <!--Контесктное меню-->
+                <ContextMenu >
+                    <MenuItem Header="Подробнее" Command="{Binding Path=bInfoSelectedItem_Command}"/>
+                    <MenuItem Header="Удалить" Command="{Binding Path=bRemoveItem_Command}"/>
+                </ContextMenu>
+            </ListView.ContextMenu>
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Name" Width="145" DisplayMemberBinding="{Binding Path = Name }"/>

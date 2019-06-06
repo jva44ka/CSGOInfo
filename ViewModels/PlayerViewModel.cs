@@ -26,6 +26,7 @@ namespace WpfLawyersSystem.ViewModels
         private Player _selectedPlayer; // для передачи выбранного item в OnePlayerViewmodel
         private string _searchText; // для поиска по имени
 
+        //Для анимации
         double _renderTransformX;
         double _pageWidth;
 

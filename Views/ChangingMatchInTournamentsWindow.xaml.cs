@@ -15,15 +15,13 @@ using System.Windows.Shapes;
 namespace WpfLawyersSystem.Views
 {
     /// <summary>
-    /// Логика взаимодействия для OnePlayerPage.xaml
+    /// Логика взаимодействия для ChangingMatchInTournamentsWindow.xaml
     /// </summary>
-    public partial class CreatePlayerWindow : Window
+    public partial class ChangingMatchInTournamentsWindow : Window
     {
-        public CreatePlayerWindow()
+        public ChangingMatchInTournamentsWindow()
         {
             InitializeComponent();
-            ViewModels.OnePlayerViewModel vm = new ViewModels.OnePlayerViewModel();
-            this.DataContext = vm;
         }
     }
 }

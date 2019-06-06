@@ -32,7 +32,8 @@
             <Label Grid.Row="2" Style="{StaticResource LabelInfo1}" Content="Убийства /смерти" />
             <Label Grid.Row="2" Grid.Column="1" Style="{StaticResource LabelInfo1}" Content="{Binding Path=SelectedPlayer.KD}"/>
             <Label Grid.Row="3" Style="{StaticResource LabelInfo2}" Content="Команда" />
-            <Label Grid.Row="3" Grid.Column="1" Style="{StaticResource LabelInfo2}" Content="{Binding SelectedPlayer.Team.Name}"/>
+            <Label Grid.Row="3" Grid.Column="1" Style="{StaticResource LabelInfo2}" 
+                   Content="{Binding SelectedPlayer.Team.Name, UpdateSourceTrigger=PropertyChanged}"/>
         </Grid>
         <Grid Grid.Row="1" Background="{StaticResource MediumGreenBrush}">
             <Grid.ColumnDefinitions>

@@ -43,9 +43,9 @@
             </Grid.ColumnDefinitions>
             <Button Grid.Column="0" Style="{StaticResource GreenButton}" FontSize="{StaticResource H2}" 
                     Content="Назад" Command="{Binding bBackToList_Command}"/>
-            <Button Grid.Column="1" Style="{StaticResource GreenButton}" Content="{StaticResource PanIcon}" 
+            <Button Grid.Column="1" Style="{StaticResource GreenButton}" Content="{StaticResource PanIcon2}" 
                     Command="{Binding bOpenSelectedItem_Command}"/>
-            <Button Grid.Column="2" Style="{StaticResource GreenButton}" Content="{StaticResource TrashIcon}"
+            <Button Grid.Column="2" Style="{StaticResource GreenButton}" Content="{StaticResource TrashIcon2}"
                     Command="{Binding bRemoveItem_Command}"/>
         </Grid>
     </Grid>
