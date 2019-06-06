@@ -1,0 +1,45 @@
+﻿<Window x:Class="WpfLawyersSystem.Views.ChangeMatchWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfLawyersSystem.Views"
+        mc:Ignorable="d"
+        Title="ChangeMatchWindow" Height="350" Width="500"
+        Background="{StaticResource MediumGreenBrush}">
+    <Grid Background="{StaticResource UltraGreenBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <TextBlock FontSize="24" Text="Team1"/>
+        <ComboBox FontSize="24" Grid.Column="1" Grid.Row="0" 
+                  ItemsSource="{Binding ListOfTeams.List}"
+                  DisplayMemberPath="Name"
+                  SelectedItem="{Binding Path=Team1, Mode=TwoWay}"/>
+        <Label FontSize="24" Content="Team 2" Grid.Row="1"/>
+        <ComboBox FontSize="24" Grid.Column="1" Grid.Row="1" 
+                  ItemsSource="{Binding ListOfTeams.List}"
+                  DisplayMemberPath="Name"
+                  SelectedItem="{Binding Path=Team2, Mode=TwoWay}"/>
+        <Label FontSize="24" Content="Team Winner" Grid.Row="2"/>
+        <ComboBox FontSize="24" Grid.Column="1" Grid.Row="2" 
+                  ItemsSource="{Binding ListOfTeams.List}"
+                  DisplayMemberPath="Name"
+                  SelectedItem="{Binding Path=TeamWinner}"/>
+        <Label FontSize="24" Content="Дата" Grid.Row="3"/>
+        <DatePicker Grid.Column="1" Grid.Row="3" SelectedDate="{Binding Time, Mode=TwoWay}"></DatePicker>
+        <Button Grid.Row="4" Content="Назад" FontSize="24" Margin="10" Style="{StaticResource GreenButton}" Command="{Binding bBackToList_Command}"
+                CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"/>
+        <Button Grid.Column="1" Grid.Row="4" Content="Удалить" FontSize="24" Margin="10" Command="{Binding bRemoveItem_Command}" 
+                CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
+                Style="{StaticResource GreenButton}"/>
+    </Grid>
+</Window>

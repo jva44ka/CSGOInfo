@@ -12,18 +12,20 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using WpfLawyersSystem.ViewModels;
 
 namespace WpfLawyersSystem.Views
 {
     /// <summary>
-    /// Логика взаимодействия для MatchPage.xaml
+    /// Логика взаимодействия для MatchCoverPage.xaml
     /// </summary>
-    public partial class MatchPage : Page
+    public partial class MatchCoverPage : Page
     {
-        public MatchPage()
+        public MatchCoverPage(out ViewModels.MatchViewModel DataContextParam)
         {
             InitializeComponent();
+            ViewModels.MatchViewModel vm = new ViewModels.MatchViewModel();
+            DataContext = vm;
+            DataContextParam = vm;
         }
     }
 }

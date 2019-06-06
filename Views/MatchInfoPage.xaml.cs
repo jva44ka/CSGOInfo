@@ -12,16 +12,15 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using WpfLawyersSystem.ViewModels;
 
 namespace WpfLawyersSystem.Views
 {
     /// <summary>
-    /// Логика взаимодействия для MatchPage.xaml
+    /// Логика взаимодействия для MatchInfoPage.xaml
     /// </summary>
-    public partial class MatchPage : Page
+    public partial class MatchInfoPage : Page
     {
-        public MatchPage()
+        public MatchInfoPage()
         {
             InitializeComponent();
         }

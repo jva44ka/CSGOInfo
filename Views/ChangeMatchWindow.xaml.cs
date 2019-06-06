@@ -10,18 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using WpfLawyersSystem.ViewModels;
 
 namespace WpfLawyersSystem.Views
 {
     /// <summary>
-    /// Логика взаимодействия для MatchPage.xaml
+    /// Логика взаимодействия для ChangeMatchWindow.xaml
     /// </summary>
-    public partial class MatchPage : Page
+    public partial class ChangeMatchWindow : Window
     {
-        public MatchPage()
+        public ChangeMatchWindow(Models.Match match)
         {
             InitializeComponent();
         }
