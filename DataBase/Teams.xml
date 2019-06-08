@@ -2,11 +2,39 @@
 <ListOfTeams xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <List>
     <Team>
-      <Name>Astralis</Name>
-      <Rating>2.2</Rating>
-      <Wins>700</Wins>
-      <Loses>200</Loses>
+      <Name>Team1</Name>
+      <Rating>1233</Rating>
+      <Wins>0</Wins>
+      <Loses>0</Loses>
       <id_Serialization>0</id_Serialization>
+      <playersIds_Serialization>
+        <int>0</int>
+      </playersIds_Serialization>
+    </Team>
+    <Team>
+      <Name>Team2</Name>
+      <Rating>323</Rating>
+      <Wins>0</Wins>
+      <Loses>0</Loses>
+      <id_Serialization>1</id_Serialization>
+      <playersIds_Serialization />
+    </Team>
+    <Team>
+      <Name>NaVi</Name>
+      <Rating>3232</Rating>
+      <Wins>0</Wins>
+      <Loses>0</Loses>
+      <id_Serialization>2</id_Serialization>
+      <playersIds_Serialization>
+        <int>1</int>
+      </playersIds_Serialization>
+    </Team>
+    <Team>
+      <Name>FaZe</Name>
+      <Rating>1.54</Rating>
+      <Wins>0</Wins>
+      <Loses>0</Loses>
+      <id_Serialization>3</id_Serialization>
       <playersIds_Serialization />
     </Team>
   </List>

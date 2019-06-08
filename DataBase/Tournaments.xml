@@ -1,4 +1,19 @@
 <?xml version="1.0"?>
 <ListOfTournaments xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <List />
+  <List>
+    <Tournament>
+      <Name>Test Tournament 1</Name>
+      <Date>2019-06-06T20:38:44.7437445+03:00</Date>
+      <id_Serialization>0</id_Serialization>
+      <mvpId_Serialization>0</mvpId_Serialization>
+      <matchesIds_Serialization />
+    </Tournament>
+    <Tournament>
+      <Name>Haba Season 1</Name>
+      <Date>2019-06-08T00:47:24.6104366+03:00</Date>
+      <id_Serialization>1</id_Serialization>
+      <mvpId_Serialization>0</mvpId_Serialization>
+      <matchesIds_Serialization />
+    </Tournament>
+  </List>
 </ListOfTournaments>

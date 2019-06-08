@@ -1,4 +1,19 @@
 <?xml version="1.0"?>
 <ListOfPlayers xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <List />
+  <List>
+    <Player>
+      <Name>TestPlayer1</Name>
+      <Age>123</Age>
+      <KD>42345</KD>
+      <id_Serialization>0</id_Serialization>
+      <teamId_Serialization>0</teamId_Serialization>
+    </Player>
+    <Player>
+      <Name>asdasd</Name>
+      <Age>54</Age>
+      <KD>55</KD>
+      <id_Serialization>1</id_Serialization>
+      <teamId_Serialization>2</teamId_Serialization>
+    </Player>
+  </List>
 </ListOfPlayers>
