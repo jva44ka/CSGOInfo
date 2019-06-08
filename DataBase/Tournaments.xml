@@ -13,7 +13,18 @@
       <Date>2019-06-08T00:47:24.6104366+03:00</Date>
       <id_Serialization>1</id_Serialization>
       <mvpId_Serialization>0</mvpId_Serialization>
-      <matchesIds_Serialization />
+      <matchesIds_Serialization>
+        <int>7</int>
+      </matchesIds_Serialization>
+    </Tournament>
+    <Tournament>
+      <Name>zxczxczxc</Name>
+      <Date>2019-06-08T12:00:33.3687925+03:00</Date>
+      <id_Serialization>2</id_Serialization>
+      <mvpId_Serialization>1</mvpId_Serialization>
+      <matchesIds_Serialization>
+        <int>6</int>
+      </matchesIds_Serialization>
     </Tournament>
   </List>
 </ListOfTournaments>

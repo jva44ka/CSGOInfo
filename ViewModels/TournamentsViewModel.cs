@@ -137,6 +137,7 @@ namespace WpfLawyersSystem.ViewModels
             {
                 _mvp = value;
                 OnPropertyChanged();
+                TournamentsView.Refresh();
             }
         }
         public ObservableCollection<Match> ItemMatches
@@ -494,6 +495,27 @@ namespace WpfLawyersSystem.ViewModels
         }
 
         public async void ChangePageAnimated(Page page)
+        { // Сам метод переключения страницы. Нужно сделать анимацию слайда влево-вправо
+            if (true)
+            {
+                await Task.Factory.StartNew(() =>
+                {
+                    for (double i = 0; i <= PageWidth; i += (PageWidth / 60))
+                    {
+                        RenderTransformX = i;
+                        Thread.Sleep(1);
+                    }
+                    CurrentPage = page;
+                    for (double i = RenderTransformX; i >= 0; i -= (PageWidth / 60))
+                    {
+                        RenderTransformX = i;
+                        Thread.Sleep(1);
+                    }
+                });
+            }
+        }
+
+        public async void ChangePageAnimatedToLeft(Page page)
         { // Сам метод переключения страницы. Нужно сделать анимацию слайда влево-вправо
             if (true)
             {

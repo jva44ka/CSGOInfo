@@ -131,6 +131,7 @@
             </Grid>
         </Grid>
         <Button Grid.Row="2" Margin="10px" MaxWidth="200" Content="Удалить" Command="{Binding bRemove_Command}"
+                CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
                 Style="{StaticResource GreenButton}"/>
     </Grid>
 </Window>

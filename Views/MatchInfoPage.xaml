@@ -42,11 +42,13 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Button Grid.Column="0" Style="{StaticResource GreenButton}" FontSize="{StaticResource H2}" 
-                    Content="Назад" Command="{Binding bBackToList_Command}"/>
+                    Content="Назад" Command="{Binding bBackToList_Command}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"/>
             <Button Grid.Column="1" Style="{StaticResource GreenButton}" Content="{StaticResource PanIcon2}" 
                     Command="{Binding bOpenSelectedItem_Command}"/>
             <Button Grid.Column="2" Style="{StaticResource GreenButton}" Content="{StaticResource TrashIcon2}"
-                    Command="{Binding bRemoveItem_Command}"/>
+                    Command="{Binding bRemoveItem_Command}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"/>
         </Grid>
     </Grid>
 </Page>
