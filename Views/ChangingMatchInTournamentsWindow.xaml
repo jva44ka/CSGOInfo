@@ -13,7 +13,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <ComboBox Margin="10" ItemsSource="{Binding Matches}"
-                      DisplayMemberPath="TeamWinner"
+                      DisplayMemberPath="Winner.Name"
                       SelectedItem="{Binding Path=SelectedMatch, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         <Grid Grid.Row="1">
             <Grid>
@@ -24,8 +24,8 @@
                 <Button Grid.Row="1" Style="{StaticResource GreenButton}" FontSize="{StaticResource H1}" Content="Назад" 
                     Command="{Binding bBackToList_Command}"
                     CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"/>
-                <Button Grid.Row="1" Style="{StaticResource GreenButton}" FontSize="{StaticResource H1}" Content="Назад" 
-                    Command="{Binding bBackToList_Command}"
+                <Button Grid.Row="1" Grid.Column="1" Style="{StaticResource GreenButton}" FontSize="{StaticResource H1}" Content="Добавить" 
+                    Command="{Binding AddExistenceMatch}"
                     CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"/>
             </Grid>
         </Grid>

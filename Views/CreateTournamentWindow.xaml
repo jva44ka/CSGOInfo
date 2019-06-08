@@ -34,16 +34,16 @@
         </Grid>
         <Grid Grid.Row="1" Background="{StaticResource LightGreenBrush}">
             <ListView Style="{StaticResource GreenListView}"
-                      ItemsSource="{Binding Matches, UpdateSourceTrigger=PropertyChanged}"
+                      ItemsSource="{Binding ItemMatches, UpdateSourceTrigger=PropertyChanged}"
                       SelectedItem="{Binding SelectedMatch}">
                 <ListView.ContextMenu>
                     <ContextMenu >
 
                         <MenuItem Header="Добавить матч">
-                            <MenuItem Header="Создать новый матч" Command="{Binding Path=bInfoSelectedItem_Command}"/>
+                            <MenuItem Header="Создать новый матч" Command="{Binding Path=OpenAddMatchInTournamentWindow}"/>
                             <MenuItem Header="Выбрать существующий матч" Command="{Binding Path=bChangeMatchInItem_Command}"/>
                         </MenuItem>
-                        <MenuItem Header="Удалить матч" Command="{Binding Path=bRemoveItem_Command}"/>
+                        <MenuItem Header="Удалить матч" Command="{Binding Path=bRemoveSelectedMatch_Command}"/>
                     </ContextMenu>
                 </ListView.ContextMenu>
                 <ListView.View>

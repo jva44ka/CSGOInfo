@@ -33,7 +33,7 @@
         </Grid>
         <Grid Grid.Row="1" Background="{StaticResource LightGreenBrush}">
             <ListView Style="{StaticResource GreenListView}"
-                      ItemsSource="{Binding Matches, UpdateSourceTrigger=PropertyChanged}"
+                      ItemsSource="{Binding ItemMatches, UpdateSourceTrigger=PropertyChanged}"
                       SelectionMode="Extended">
                 <ListView.View>
                     <GridView>
