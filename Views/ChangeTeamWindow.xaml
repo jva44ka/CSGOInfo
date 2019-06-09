@@ -28,18 +28,14 @@
                 <RowDefinition/>
                 <RowDefinition/>
                 <RowDefinition/>
-                <RowDefinition/>
             </Grid.RowDefinitions>
             <Label Grid.Column="0" Grid.Row="0" HorizontalContentAlignment="Center" Content="Name"/>
             <TextBox Grid.Column="1" Grid.Row="0" TextAlignment="Center" Text="{Binding SelectedTeam.Name}" Background="{StaticResource LightGreenBrush}"/>
-            <Label Grid.Column="0" Grid.Row="1" HorizontalContentAlignment="Center" Content="Rating"/>
-            <TextBox Grid.Column="1" Grid.Row="1" TextAlignment="Center" Text="{Binding SelectedTeam.Rating}" Background="{StaticResource LightGreenBrush}"/>
-            <Label Grid.Column="0" Grid.Row="2" HorizontalContentAlignment="Center" Content="Wins"/>
-            <Label Grid.Column="1" Grid.Row="2" HorizontalContentAlignment="Center" Content="Loses"/>
-            <TextBox Grid.Column="0" Grid.Row="3" TextAlignment="Center" Text="{Binding SelectedTeam.Wins}" Background="{StaticResource LightGreenBrush}"/>
-            <TextBox Grid.Column="1" Grid.Row="3" TextAlignment="Center" Text="{Binding SelectedTeam.Loses}" Background="{StaticResource LightGreenBrush}"/>
+            <Label Grid.Column="0" Grid.Row="1" HorizontalContentAlignment="Center" Content="Wins"/>
+            <Label Grid.Column="1" Grid.Row="1" HorizontalContentAlignment="Center" Content="Loses"/>
+            <TextBox Grid.Column="0" Grid.Row="2" TextAlignment="Center" Text="{Binding SelectedTeam.Wins}" Background="{StaticResource LightGreenBrush}"/>
+            <TextBox Grid.Column="1" Grid.Row="2" TextAlignment="Center" Text="{Binding SelectedTeam.Loses}" Background="{StaticResource LightGreenBrush}"/>
         </Grid>
-        <Separator/>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
@@ -57,11 +53,14 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
                 <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center">Игрок 1</TextBlock>
-                <TextBox Grid.Row="1" Text="{Binding Players[0].Name}" Background="{StaticResource LightGreenBrush}"/>
-                <TextBox Grid.Row="2" Text="{Binding Players[0].Age}" Background="{StaticResource LightGreenBrush}"/>
-                <TextBox Grid.Row="3" Text="{Binding Players[0].KD}" Background="{StaticResource LightGreenBrush}"/>
+                <TextBox Grid.Row="1" Text="{Binding Players[0].Name}" Background="{StaticResource LightGreenBrush}"
+                         IsEnabled="{Binding Swithers[0], UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox Grid.Row="2" Text="{Binding Players[0].Age}" Background="{StaticResource LightGreenBrush}"
+                         IsEnabled="{Binding Swithers[0], UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox Grid.Row="3" Text="{Binding Players[0].KD}" Background="{StaticResource LightGreenBrush}"
+                         IsEnabled="{Binding Swithers[0], UpdateSourceTrigger=PropertyChanged}"/>
                 <Button Grid.Row="4" Margin="3" x:Name="ButtonCreatePlayer1" Style="{StaticResource GreenButton}"
-                        Content="{Binding Path=ButtonPlayersContent[0], UpdateSourceTrigger=PropertyChanged}" 
+                        Content="{Binding Path=ButtonPlayersContent[0], UpdateSourceTrigger=PropertyChanged, NotifyOnTargetUpdated=True}" 
                         Command="{Binding bCreateOrDeletePlayer_Command}" CommandParameter="0"/>
             </Grid>
             <Grid Grid.Column="1">
@@ -73,9 +72,12 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
                 <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="Игрок 2"/>
-                <TextBox Grid.Row="1" Text="{Binding Players[1].Name}" Background="{StaticResource LightGreenBrush}"/>
-                <TextBox Grid.Row="2" Text="{Binding Players[1].Age}" Background="{StaticResource LightGreenBrush}"/>
-                <TextBox Grid.Row="3" Text="{Binding Players[1].KD}" Background="{StaticResource LightGreenBrush}"/>
+                <TextBox Grid.Row="1" Text="{Binding Players[1].Name}" Background="{StaticResource LightGreenBrush}"
+                         IsEnabled="{Binding Swithers[1], UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox Grid.Row="2" Text="{Binding Players[1].Age}" Background="{StaticResource LightGreenBrush}"
+                         IsEnabled="{Binding Swithers[1], UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox Grid.Row="3" Text="{Binding Players[1].KD}" Background="{StaticResource LightGreenBrush}"
+                         IsEnabled="{Binding Swithers[1], UpdateSourceTrigger=PropertyChanged}"/>
                 <Button Grid.Row="4" Margin="3" 
                         Content="{Binding Path=ButtonPlayersContent[1],  UpdateSourceTrigger=PropertyChanged}" 
                         Command="{Binding bCreateOrDeletePlayer_Command}" CommandParameter="1"
@@ -90,9 +92,12 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
                 <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="Игрок 3"/>
-                <TextBox Grid.Row="1" Text="{Binding Players[2].Name}" Background="{StaticResource LightGreenBrush}"/>
-                <TextBox Grid.Row="2" Text="{Binding Players[2].Age}" Background="{StaticResource LightGreenBrush}"/>
-                <TextBox Grid.Row="3" Text="{Binding Players[2].KD}" Background="{StaticResource LightGreenBrush}"/>
+                <TextBox Grid.Row="1" Text="{Binding Players[2].Name}" Background="{StaticResource LightGreenBrush}"
+                         IsEnabled="{Binding Swithers[2], UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox Grid.Row="2" Text="{Binding Players[2].Age}" Background="{StaticResource LightGreenBrush}"
+                         IsEnabled="{Binding Swithers[2], UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox Grid.Row="3" Text="{Binding Players[2].KD}" Background="{StaticResource LightGreenBrush}"
+                         IsEnabled="{Binding Swithers[2], UpdateSourceTrigger=PropertyChanged}"/>
                 <Button Grid.Row="4" Margin="3" Content="{Binding Path=ButtonPlayersContent[2]}" 
                         Command="{Binding bCreateOrDeletePlayer_Command}" CommandParameter="2"
                         Style="{StaticResource GreenButton}"/>
@@ -106,9 +111,12 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
                 <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="Игрок 4"/>
-                <TextBox Grid.Row="1" Text="{Binding Players[3].Name}" Background="{StaticResource LightGreenBrush}"/>
-                <TextBox Grid.Row="2" Text="{Binding Players[3].Age}" Background="{StaticResource LightGreenBrush}"/>
-                <TextBox Grid.Row="3" Text="{Binding Players[3].KD}" Background="{StaticResource LightGreenBrush}"/>
+                <TextBox Grid.Row="1" Text="{Binding Players[3].Name}" Background="{StaticResource LightGreenBrush}"
+                         IsEnabled="{Binding Swithers[3], UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox Grid.Row="2" Text="{Binding Players[3].Age}" Background="{StaticResource LightGreenBrush}"
+                         IsEnabled="{Binding Swithers[3], UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox Grid.Row="3" Text="{Binding Players[3].KD}" Background="{StaticResource LightGreenBrush}"
+                         IsEnabled="{Binding Swithers[3], UpdateSourceTrigger=PropertyChanged}"/>
                 <Button Grid.Row="4" Margin="3" Content="{Binding Path=ButtonPlayersContent[3]}" 
                         Command="{Binding bCreateOrDeletePlayer_Command}" CommandParameter="3"
                         Style="{StaticResource GreenButton}"/>
@@ -122,9 +130,12 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
                 <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="Игрок 5"/>
-                <TextBox Grid.Row="1" Text="{Binding Players[4].Name}" Background="{StaticResource LightGreenBrush}"/>
-                <TextBox Grid.Row="2" Text="{Binding Players[4].Age}" Background="{StaticResource LightGreenBrush}"/>
-                <TextBox Grid.Row="3" Text="{Binding Players[4].KD}" Background="{StaticResource LightGreenBrush}"/>
+                <TextBox Grid.Row="1" Text="{Binding Players[4].Name}" Background="{StaticResource LightGreenBrush}"
+                         IsEnabled="{Binding Swithers[4], UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox Grid.Row="2" Text="{Binding Players[4].Age}" Background="{StaticResource LightGreenBrush}"
+                         IsEnabled="{Binding Swithers[4], UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox Grid.Row="3" Text="{Binding Players[4].KD}" Background="{StaticResource LightGreenBrush}"
+                         IsEnabled="{Binding Swithers[4], UpdateSourceTrigger=PropertyChanged}"/>
                 <Button Grid.Row="4" Margin="3" Content="{Binding Path=ButtonPlayersContent[4]}" 
                         Command="{Binding bCreateOrDeletePlayer_Command}" CommandParameter="4"
                         Style="{StaticResource GreenButton}"/>

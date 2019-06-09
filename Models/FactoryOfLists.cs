@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Xml.Serialization;
 using System.Runtime.Serialization;
+using System.Threading;
 
 namespace WpfLawyersSystem.Models
 { 
@@ -32,24 +33,6 @@ namespace WpfLawyersSystem.Models
                 if (_objPlayers == null)
                 {
                     _objPlayers = new ListOfPlayers();
-                    /*                                                      //До серриализации это была инициализация тестовой бд
-                    _objPlayers.List.Add(new Player("Zeus", 31, 0.95));
-                    _objPlayers.List.Add(new Player("Edward", 32, 0.98));
-                    ObservableCollection<Player> players = new ObservableCollection<Player>();
-                    players.Add(_objPlayers.List[0]);
-                    players.Add(_objPlayers.List[1]);
-                    ObjTeams.List.Add(new Team("NaVi", 1.05, 15, 20, players));
-
-                    _objPlayers.List.Add(new Player("NiKo", 26, 1.44));
-                    _objPlayers.List.Add(new Player("Rain", 25, 1.20));
-                    players.Clear();
-                    players = new ObservableCollection<Player>();
-                    players.Add(_objPlayers.List[0]);
-                    players.Add(_objPlayers.List[0]);
-                    ObjTeams.List.Add(new Team("FaZe", 1.12, 22, 10, players));
-                    _objPlayers.List.Add(new Player("ЖМА", 54, 1.54, ObjTeams.List[0]));
-                    _objPlayers.List.Add(new Player("Детров", 27, 2.28, ObjTeams.List[1]));
-                    */
                 }
                 return _objPlayers;
             }
@@ -284,6 +267,8 @@ namespace WpfLawyersSystem.Models
 
         public static void Save()
         {
+            Views.LoadSaveTheme loadWindow = new Views.LoadSaveTheme("Сохранение");
+            loadWindow.Show();
             //Раздача собственных id
             for (int i = 0; i < ObjMatches.List.Count; i++) ObjMatches.List[i].id_Serialization = i;
             for (int i = 0; i < ObjPlayers.List.Count; i++) ObjPlayers.List[i].id_Serialization = i;
@@ -310,9 +295,12 @@ namespace WpfLawyersSystem.Models
             for (int i = 0; i < ObjTeams.List.Count; i++)
             {
                 ObjTeams.List[i].playersIds_Serialization = new int[ObjTeams.List[i].TheCrew.Count];
-                for (int k = 0; k < ObjTeams.List[i].TheCrew.Count; k++)
+                if (ObjTeams.List[i].TheCrew != null && ObjTeams.List[i].TheCrew.Count > 0)
                 {
-                    ObjTeams.List[i].playersIds_Serialization[k] = ObjTeams.List[i].TheCrew[k].id_Serialization;
+                    for (int k = 0; k < ObjTeams.List[i].TheCrew.Count; k++)
+                    {
+                        ObjTeams.List[i].playersIds_Serialization[k] = ObjTeams.List[i].TheCrew[k].id_Serialization;
+                    }
                 }
             }
 
@@ -326,6 +314,7 @@ namespace WpfLawyersSystem.Models
             //Турнирам
             for (int i = 0; i < ObjTournaments.List.Count; i++)
             {
+                ObjTournaments.List[i].mvpId_Serialization = ObjTournaments.List[i].Mvp.id_Serialization;
                 ObjTournaments.List[i].matchesIds_Serialization = new int[ObjTournaments.List[i].Matches.Count];
                 for (int k = 0; k < ObjTournaments.List[i].Matches.Count; k++)
                 {
@@ -338,15 +327,14 @@ namespace WpfLawyersSystem.Models
             SerializeAbstract(ObjTeams, @"..\..\DataBase\Teams.xml");
             SerializeAbstract(ObjTop, @"..\..\DataBase\Top.xml");
             SerializeAbstract(ObjTournaments, @"..\..\DataBase\Tournaments.xml");
-            /*SerializeMatches();
-            SerializePlayers();
-            SerializeTeams();
-            SerializeTop();
-            SerializeTournaments();*/
+            Thread.Sleep(500);
+            loadWindow.Close();
 
         }
         public static void Load()
         {
+            Views.LoadSaveTheme loadWindow = new Views.LoadSaveTheme("Загрузка");
+            loadWindow.Show();
 
             DeserializeMatches();
             DeserializePlayers();
@@ -388,16 +376,14 @@ namespace WpfLawyersSystem.Models
             //Турнирам
             for (int i = 0; i < ObjTournaments.List.Count; i++)
             {
+                ObjTournaments.List[i].Mvp = ObjPlayers.List.ToList().Find(item => item.id_Serialization == ObjTournaments.List[i].mvpId_Serialization);
                 for (int k = 0; k < ObjTournaments.List[i].matchesIds_Serialization.Length; k++)
                 {
-                    ObjTournaments.List[i].Matches.Add(ObjMatches.List.ToList().Find(item => item.id_Serialization == ObjMatches.List[i].id_Serialization));
+                    ObjTournaments.List[i].Matches.Add(ObjMatches.List.ToList().Find(item => item.id_Serialization == ObjTournaments.List[i].matchesIds_Serialization[k]));
                 }
             }
-            /*DeserializeMatches();
-            DeserializePlayers();
-            DeserializeTeams();
-            DeserializeTop();
-            DeserializeTournaments();*/
+            Thread.Sleep(500);
+            loadWindow.Close();
         }
     }
 }

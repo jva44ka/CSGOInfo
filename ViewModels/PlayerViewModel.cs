@@ -154,9 +154,12 @@ namespace WpfLawyersSystem.ViewModels
             {
                 return new DelegateCommand(() =>
                 {
-                    SelectedPlayer.Team.TheCrew.Remove(_selectedPlayer);
-                    FactoryOfLists.ObjPlayers.List.Remove(SelectedPlayer);
-                    ChangePageAnimated(_playersListPage);
+                    if (SelectedPlayer != null)
+                    {
+                        SelectedPlayer.Team.TheCrew.Remove(_selectedPlayer);
+                        FactoryOfLists.ObjPlayers.List.Remove(SelectedPlayer);
+                        ChangePageAnimated(_playersListPage);
+                    }
                 });
             }
         }

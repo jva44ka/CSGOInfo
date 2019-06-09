@@ -20,7 +20,7 @@ namespace WpfLawyersSystem.ViewModels
     {
         //Общие поля списка, выбранного или нового турнира и запроса
         private ListOfTournaments _items; // items в ListView
-        private Tournament _selectedTournament;
+        private Tournament _selectedItem;
         private Tournament _newTournament;
         private string _searchText;
 
@@ -50,7 +50,9 @@ namespace WpfLawyersSystem.ViewModels
 
         //Для смены страницы
         private Page _tournamentsListPage; //Страница списка
-        private Page _tournamentInfoPage; //Страница инфы о матче
+        private Page _tournamentInfoPage; //Страница инфы о турнире
+        private Page _createTournamentPage; //Страница создания турнира
+        private Page _tournamentChangePage; // Страница изменения турнира
         private Page _currentPage; // Текущая страница
 
         /// <summary>
@@ -69,10 +71,10 @@ namespace WpfLawyersSystem.ViewModels
         }
         public Tournament SelectedItem
         {
-            get { return _selectedTournament; }
+            get { return _selectedItem; }
             set
             {
-                _selectedTournament = value;
+                _selectedItem = value;
                 OnPropertyChanged();
             }
         }
@@ -137,7 +139,6 @@ namespace WpfLawyersSystem.ViewModels
             {
                 _mvp = value;
                 OnPropertyChanged();
-                TournamentsView.Refresh();
             }
         }
         public ObservableCollection<Match> ItemMatches
@@ -275,6 +276,10 @@ namespace WpfLawyersSystem.ViewModels
             _tournamentsListPage.DataContext = this;
             _tournamentInfoPage = new Views.TournamentInfoPage();
             _tournamentInfoPage.DataContext = this;
+            _createTournamentPage = new Views.CreateTournamentPage();
+            _createTournamentPage.DataContext = this;
+            _tournamentChangePage = new Views.ChangeTournamentPage();
+            _tournamentChangePage.DataContext = this;
             CurrentPage = _tournamentsListPage;
 
             _renderTransformX = 0.5;
@@ -289,15 +294,18 @@ namespace WpfLawyersSystem.ViewModels
         //Метод
         public void OpenCreatingWindow()
         {
+            Name = null;
+            TournamentTime = DateTime.Now;
+            Mvp = null;
             ItemMatches = new ObservableCollection<Match>();
-            Time = DateTime.Now;
             /*NewMatch = new Match();
             NewMatch.Team1 = Team1;
             NewMatch.Team2 = Team2;
             NewMatch.Winner = TeamWinner;*/
-            Views.CreateTournamentWindow newWindow = new Views.CreateTournamentWindow();
+            /*Views.CreateTournamentWindow newWindow = new Views.CreateTournamentWindow();
             newWindow.DataContext = this;
-            newWindow.ShowDialog();
+            newWindow.ShowDialog();*/
+            ChangePageAnimated(_createTournamentPage);
         }
 
         //Комманды
@@ -326,7 +334,8 @@ namespace WpfLawyersSystem.ViewModels
                     Time = DateTime.Now;
                     Mvp = null;
                     ItemMatches = new ObservableCollection<Match>();
-                    w.Close();
+                    if (w != null) w.Close();
+                    ChangePageAnimated(_tournamentsListPage);
                     TournamentsView.Refresh();
                 });
             }
@@ -343,12 +352,9 @@ namespace WpfLawyersSystem.ViewModels
                     NewMatch.Team2 = Team2;
                     NewMatch.Winner = TeamWinner;
                     NewMatch.Time = Time;
-                    if (ItemMatches == null)
-                    {
-                        ItemMatches = new ObservableCollection<Match>();
-                    }
+                    if (ItemMatches == null) ItemMatches = new ObservableCollection<Match>();
                     ItemMatches.Add(NewMatch);
-                    w.Close();
+                    if (w != null) w.Close();
                 });
             }
         }
@@ -358,11 +364,8 @@ namespace WpfLawyersSystem.ViewModels
             {
                 return new DelegateCommand<Window>((w) =>
                 {
-                    if (ItemMatches == null)
-                    {
-                        ItemMatches = new ObservableCollection<Match>();
-                    }
-                    ItemMatches.Add(SelectedMatch);
+                    if (ItemMatches == null) ItemMatches = new ObservableCollection<Match>();
+                    if (SelectedMatch != null) ItemMatches.Add(SelectedMatch);
                     w.Close();
                 });
             }
@@ -387,10 +390,6 @@ namespace WpfLawyersSystem.ViewModels
             {
                 return new DelegateCommand(() =>
                 {
-                    Views.ChangeTournamentWindow newWindow = new Views.ChangeTournamentWindow();
-                    Name = SelectedItem.Name;
-                    Mvp = SelectedItem.Mvp;
-                    Time = SelectedItem.Date;
                     if (SelectedItem.Matches != null)
                     {
                         ItemMatches = SelectedItem.Matches;
@@ -399,8 +398,7 @@ namespace WpfLawyersSystem.ViewModels
                     {
                         ItemMatches = new ObservableCollection<Match>();
                     }
-                    newWindow.DataContext = this;
-                    newWindow.ShowDialog();
+                    ChangePageAnimated(_tournamentChangePage);
                 });
             }
         }
@@ -434,15 +432,22 @@ namespace WpfLawyersSystem.ViewModels
         { // Переключает фрэйм со страницы информации о команде на страницу всего списка
             get
             {
-                return new DelegateCommand<Window>((w) => {
-                    if (w != null)
-                    {
-                        w.Close();
-                    }
-                    else
-                    {
-                        ChangePageAnimated(_tournamentsListPage);
-                    }
+                return new DelegateCommand(() => {
+                    ChangePageAnimated(_tournamentsListPage);
+                    TournamentsView.Refresh();
+                });
+            }
+        }
+        public ICommand bBackToInfo_Command
+        { // Переключает фрэйм со страницы информации о команде на страницу всего списка
+            get
+            {
+                return new DelegateCommand(() => {
+                    SelectedItem.Name = Name;
+                    SelectedItem.Date = TournamentTime;
+                    SelectedItem.Mvp = Mvp;
+                    SelectedItem.Matches = Matches;
+                    ChangePageAnimated(_tournamentInfoPage);
                 });
             }
         }

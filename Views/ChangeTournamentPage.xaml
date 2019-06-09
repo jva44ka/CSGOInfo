@@ -1,0 +1,71 @@
+﻿<Page x:Class="WpfLawyersSystem.Views.ChangeTournamentPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfLawyersSystem.Views"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="600"
+      Background="{StaticResource MediumGreenBrush}"
+      Title="ChangeTournamentPage">
+
+    <Grid Margin="80,40">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Label Style="{StaticResource LabelInfo1}" Content="Название" />
+            <TextBox Grid.Column="1" Style="{StaticResource BaseTextBox}" Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <Label Grid.Row="1" Style="{StaticResource LabelInfo2}" Content="Дата" />
+            <DatePicker Grid.Row="1" Background="{StaticResource LightGreenBrush}" Grid.Column="1" SelectedDate="{Binding Path=TournamentTime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <Label Grid.Row="2" Style="{StaticResource LabelInfo1}" Content="Лучший игрок (MVP)" />
+            <ComboBox Grid.Row="3" Grid.Column="1" ItemsSource="{Binding Players}"
+                      DisplayMemberPath="Name"
+                      SelectedItem="{Binding Path=Mvp, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        </Grid>
+        <Grid Grid.Row="1" Background="{StaticResource LightGreenBrush}">
+            <ListView Style="{StaticResource GreenListView}"
+                      ItemsSource="{Binding ItemMatches, UpdateSourceTrigger=PropertyChanged}"
+                      SelectedItem="{Binding SelectedMatch}">
+                <ListView.ContextMenu>
+                    <ContextMenu >
+
+                        <MenuItem Header="Добавить матч">
+                            <MenuItem Header="Создать новый матч" Command="{Binding Path=OpenAddMatchInTournamentWindow}"/>
+                            <MenuItem Header="Выбрать существующий матч" Command="{Binding Path=bChangeMatchInItem_Command}"/>
+                        </MenuItem>
+                        <MenuItem Header="Удалить матч" Command="{Binding Path=bRemoveSelectedMatch_Command}"/>
+                    </ContextMenu>
+                </ListView.ContextMenu>
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Team 1" Width="150" DisplayMemberBinding="{Binding Path = Team1.Name }"/>
+                        <GridViewColumn Header="Team 2" Width="150" DisplayMemberBinding="{Binding Path = Team2.Name }" />
+                        <GridViewColumn Header="Winner" Width="150" DisplayMemberBinding="{Binding Path = Winner.Name}" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
+        <Grid Grid.Row="2" Background="{StaticResource MediumGreenBrush}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Style="{StaticResource GreenButton}" FontSize="{StaticResource H2}" 
+                    Content="Назад" Command="{Binding bBackToInfo_Command}"/>
+            <Button Grid.Column="2" Style="{StaticResource GreenButton}" Content="Удалить" FontSize="{StaticResource H2}"
+                    Command="{Binding bRemoveItem_Command}"/>
+        </Grid>
+    </Grid>
+</Page>

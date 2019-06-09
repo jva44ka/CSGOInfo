@@ -27,16 +27,17 @@ namespace WpfLawyersSystem.Models
         }
         public double Rating {
             get { return _rating; }
-            set
+            /*set
             {
                 _rating = value;
-            }
+            }*/
         }
         public int Wins {
             get { return _wins; }
             set
             {
                 _wins = value;
+                CalculateRating();
             }
         }
         public int Loses {
@@ -44,6 +45,7 @@ namespace WpfLawyersSystem.Models
             set
             {
                 _loses = value;
+                CalculateRating();
             }
         }
 
@@ -72,12 +74,12 @@ namespace WpfLawyersSystem.Models
         {
             _theCrew = new ObservableCollection<Player>();
         }
-        public Team(string name = "", double rating = 0, int wins = 0, int loses = 0, ObservableCollection<Player> theCrew = null)
+        public Team(string name = "", int wins = 0, int loses = 0, ObservableCollection<Player> theCrew = null)
         {
             this._name = name;
-            this._rating = rating;
             this._wins = wins;
             this._loses = loses;
+            CalculateRating();
             _theCrew = (theCrew != null) ? this._theCrew = theCrew : _theCrew = new ObservableCollection<Player>();
         }
 
@@ -96,6 +98,12 @@ namespace WpfLawyersSystem.Models
                 this._theCrew = new ObservableCollection<Player>();
             }
 
+        }
+
+        public void CalculateRating() // Можно в будущем поставить private т.к. пересчет будет только внутри класса 
+        {
+            if (_loses != 0) _rating = _wins / _loses; // Тут можно вставить более сложную формулу
+            else _rating = _wins / 1;
         }
     }
 

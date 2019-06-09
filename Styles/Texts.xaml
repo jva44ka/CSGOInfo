@@ -77,40 +77,32 @@
         </Setter>
     </Style>
 
-    <!-- unabled things-->
+    <!-- unabled things
 
-    <Style x:Key="TextBoxPlayer1_Unabling" BasedOn="{StaticResource BaseTextBox}" TargetType="TextBox">
-        <Setter Property="Template">
+    <Style x:Key="TextBoxPlayerData1" TargetType="TextBox">
+        <Setter Property="Background" Value="{StaticResource LightGreenBrush}"/>
+        <Setter Property="IsEnabled" Value="{Binding DataContext.Swithers[0], UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"/>
+    </Style>
+
+    <Style x:Key="TextBoxPlayersData" TargetType="TextBox">
+        <Setter Property="Background" Value="{StaticResource MediumGreenBrush}"/>
+        <Setter Property="IsEnabled" Value="True"/>
+        <Setter Property="Visibility" Value="Visible"/>
+        <Setter Property="Text" Value=""/>
+        <Setter Property="Template" TargetName="TextBox">
             <Setter.Value>
-                <ControlTemplate TargetType="TextBox">
+                <ControlTemplate>
                     <ControlTemplate.Triggers>
-                        <MultiTrigger>
-                            
-                        </MultiTrigger>
-                        <!--<DataTrigger Binding="{Binding DataContext.Switcher[0] }" Value="True">
-                            <Setter Property="Background" Value="{StaticResource MediumGreenBrush}"/>
-                            <Setter Property="IsEnabled" Value="True"/>
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding DataContext.Switcher[0] }" Value="False">
-                            <Setter Property="Background" Value="{StaticResource DarkBrush}"/>
+                        <DataTrigger Binding="{Binding DataContext.Swithers[0], UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}" Value="False">
                             <Setter Property="IsEnabled" Value="False"/>
-                        </DataTrigger>
-                        -->
-                        <!--
-                        <DataTrigger Binding="{Binding ElementName=ButtonCreatePlayer1, Path=Text }" Value="Удалить">
-                            <Setter Property="Background" Value="{StaticResource MediumGreenBrush}"/>
-                            <Setter Property="IsEnabled" Value="True"/>
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding ElementName=ButtonCreatePlayer1, Path=Text }" Value="Создать">
+                            <Setter Property="Text" Value=""/>
+                            <Setter Property="Visibility" Value="Hidden"/>
                             <Setter Property="Background" Value="{StaticResource DarkBrush}"/>
-                            <Setter Property="IsEnabled" Value="False"/>
                         </DataTrigger>
-                        -->
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
-        </Setter>
     </Style>
-
-    <!-- unabled things-->
+    unabled things -->
+    
 </ResourceDictionary>

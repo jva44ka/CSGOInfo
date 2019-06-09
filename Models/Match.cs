@@ -62,6 +62,14 @@ namespace WpfLawyersSystem.Models
             }
         }
 
+        public string Info
+        {
+            get
+            {
+                return string.Format("{0} VS {1} {2}/{3}", Team1.Name, Team2.Name, Time.Month, Time.Year);
+            }
+        }
+
 
         //Для серриализации
         public int id_Serialization { get; set; }
